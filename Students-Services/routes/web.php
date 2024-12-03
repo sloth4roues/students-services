@@ -7,6 +7,5 @@ Route::get('/', function () {
 });
 
 Route::get('/myRoute', function () {
-    echo'Voici un test';
-    return NULL;
+    return view('coucou');
 });

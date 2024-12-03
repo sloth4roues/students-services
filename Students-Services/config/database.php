@@ -47,9 +47,9 @@ return [
             'url' => env('DB_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
+            'database' => env('DB_DATABASE', 'etudiant-exchange'),  // Remplacez ici par le nom de votre base de données
+            'username' => env('DB_USERNAME', 'root'),  // Remplacez par votre utilisateur MySQL
+            'password' => env('DB_PASSWORD', ''),  // Remplacez par votre mot de passe MySQL
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => env('DB_CHARSET', 'utf8mb4'),
             'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
@@ -61,6 +61,7 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
+
 
         'mariadb' => [
             'driver' => 'mariadb',
