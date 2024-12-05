@@ -2,10 +2,13 @@
 session_start();
 
 if (isset($_POST["register"])) {
-  $username = $_POST["username"];
+  $email = $_POST["email"];
+  $name = $_POST["name"];
   $password = $_POST["password"];
 
-  if ($username == "") {
+  if ($email == "" || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo "<script>alert('Please enter a valid email.'); window.location = './register.php';</script>";
+  } elseif ($name == "") {
     echo "<script>alert('Please enter a valid username.'); window.location = './register.php';</script>";
   } elseif ($password == "") {
     echo "<script>alert('Please enter a valid password.'); window.location = './register.php';</script>";
