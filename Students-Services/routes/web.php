@@ -13,21 +13,19 @@ Route::get('/myRoute', function () {
     return view('coucou');
 });
 
+// Routes d'inscription
 Route::get('/register', [RegisterController::class, 'create']);
 Route::post('/register', [RegisterController::class, 'store']);
-Route::post('/login', [LoginController::class, 'create']);
+
+// Routes de connexion
+Route::get('/login', [LoginController::class, 'create']);
 Route::post('/login', [LoginController::class, 'store']);
-// returns the home page with all posts
-Route::get('/', UserController::class .'@index')->name('posts.index');
-// returns the form for adding a post
-Route::get('/user/create', UserController::class . '@create')->name('posts.create');
-// adds a post to the database
-Route::post('/user', UserController::class .'@store')->name('posts.store');
-// returns a page that shows a full post
-Route::get('/user/{post}', UserController::class .'@show')->name('posts.show');
-// returns the form for editing a post
-Route::get('/user/{post}/edit', UserController::class .'@edit')->name('posts.edit');
-// updates a post
-Route::put('/user/{post}', UserController::class .'@update')->name('posts.update');
-// deletes a post
-Route::delete('/user/{post}', UserController::class .'@destroy')->name('posts.destroy');
+
+// Routes utilisateur
+Route::get('/user', [UserController::class, 'index'])->name('user.index'); // Liste des utilisateurs
+Route::get('/user/create', [UserController::class, 'create'])->name('user.create'); // Formulaire de création
+Route::post('/user', [UserController::class, 'store'])->name('user.store'); // Ajout d'un utilisateur
+Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show'); // Détails d'un utilisateur
+Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit'); // Formulaire de modification
+Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update'); // Mise à jour
+Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy'); // Suppression

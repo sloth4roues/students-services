@@ -13,8 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-
-        return view('register.index', compact('users'));
+        return view('register', compact('users'));
     }
 
     /**
@@ -22,13 +21,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request -> validate([
+        $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required',
-            'password' => 'required'
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed|min:6',  
         ]);
-        User::created($request->all());
-        return redirect()->route('register.index')
+        
+        // Hashage du mot de passe avant de l'enregistrer
+        $requestData = $request->all();
+        $requestData['password'] = bcrypt($request->password);
+        $requestData['points'] = 0; 
+        $requestData['registration_date'] = now(); 
+
+        User::create($requestData);
+
+        return redirect()->route('user.index')
             ->with('success', 'User created successfully.');
     }
 
@@ -37,9 +44,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::find($id);
-
-        return view('register.show', compact('user'));
+        $user = User::findOrFail($id);
+        return view('register', compact('user'));
     }
 
     /**
@@ -47,16 +53,21 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request -> validate([
+        $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required',
-            'password' => 'required'
+            'email' => 'required|email',
+            'password' => 'nullable|confirmed|min:6', 
         ]);
 
-        $user = User::find($id);
+        $user = User::findOrFail($id);
+        
+        if ($request->has('password')) {
+            $request->merge(['password' => bcrypt($request->password)]);
+        }
+
         $user->update($request->all());
 
-        return redirect()->route('register.index')
+        return redirect()->route('user.index')
             ->with('success', 'User updated successfully.');
     }
 
@@ -66,21 +77,25 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::find($id);
-        $user->delete();
 
-        return redirect()->route('register.index')
-            ->with('success', 'User deleted successfully.');
+        if ($user) {
+            $user->delete();
+            return redirect()->route('user.index')
+                ->with('success', 'User deleted successfully.');
+        }
+
+        return redirect()->route('user.index')
+            ->with('error', 'User not found.');
     }
 
     public function create()
     {
-        return view('register.create');
+        return view('register');
     }
 
     public function edit(string $id)
     {
-        $user = User::find($id);
-
-        return view('register.edit', compact('user'));
+        $user = User::findOrFail($id);
+        return view('register', compact('user'));
     }
 }
