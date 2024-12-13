@@ -15,6 +15,10 @@ class User extends Authenticatable
         'email',
         'password',
         'points',
+<<<<<<< HEAD
+=======
+        'registration_date'
+>>>>>>> ui-auth
     ];
 
     protected $hidden = [
