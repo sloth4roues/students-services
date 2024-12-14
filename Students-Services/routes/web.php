@@ -5,13 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/myRoute', function () {
-    return view('coucou');
-});
+Route::get('/', [UserController::class, 'home'])->name('home');
 
 // Routes d'inscription
 Route::get('/register', [RegisterController::class, 'create']);
@@ -29,3 +23,4 @@ Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show'); 
 Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit'); // Formulaire de modification
 Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update'); // Mise à jour
 Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy'); // Suppression
+Route::get('/profile', [UserController::class, 'profile'])->name('user.profile')->middleware('auth');

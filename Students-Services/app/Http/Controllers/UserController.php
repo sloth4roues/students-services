@@ -4,16 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function home()
     {
-        $users = User::all();
-        return view('register', compact('users'));
+        return view('home');
+    }
+
+    /**
+     * Display the logged-in user's profile.
+     */
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('users.profile', compact('user'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('users.create');
     }
 
     /**
@@ -21,21 +37,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|min:6',  
-        ]);
+        $validatedData = $this->validateUser($request);
         
-        // Hashage du mot de passe avant de l'enregistrer
-        $requestData = $request->all();
-        $requestData['password'] = bcrypt($request->password);
-        $requestData['points'] = 0; 
-        $requestData['registration_date'] = now(); 
+        $validatedData['password'] = bcrypt($validatedData['password']);
 
-        User::create($requestData);
+        User::create($validatedData);
 
-        return redirect()->route('user.index')
+        return redirect()->route('user.profile')
             ->with('success', 'User created successfully.');
     }
 
@@ -45,7 +53,16 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
-        return view('register', compact('user'));
+        return view('users.show', compact('user'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $user = User::findOrFail($id);
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -53,21 +70,19 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email',
-            'password' => 'nullable|confirmed|min:6', 
-        ]);
-
         $user = User::findOrFail($id);
         
+        $validatedData = $this->validateUser($request, $id);
+
         if ($request->has('password')) {
-            $request->merge(['password' => bcrypt($request->password)]);
+            $validatedData['password'] = bcrypt($validatedData['password']);
+        } else {
+            unset($validatedData['password']);
         }
 
-        $user->update($request->all());
+        $user->update($validatedData);
 
-        return redirect()->route('user.index')
+        return redirect()->route('user.profile')
             ->with('success', 'User updated successfully.');
     }
 
@@ -76,26 +91,36 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::find($id);
-
-        if ($user) {
-            $user->delete();
-            return redirect()->route('user.index')
-                ->with('success', 'User deleted successfully.');
-        }
-
-        return redirect()->route('user.index')
-            ->with('error', 'User not found.');
-    }
-
-    public function create()
-    {
-        return view('register');
-    }
-
-    public function edit(string $id)
-    {
         $user = User::findOrFail($id);
-        return view('register', compact('user'));
+        $user->delete();
+
+        return redirect()->route('login')
+            ->with('success', 'User deleted successfully.');
+    }
+
+    /**
+     * Validate user input.
+     */
+    private function validateUser(Request $request, $userId = null)
+    {
+        $rules = [
+            'name' => 'required|max:255',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($userId),
+            ],
+            'password' => 'required|confirmed|min:6',
+        ];
+
+        $messages = [
+            'name.required' => 'Le champ nom est obligatoire.',
+            'email.required' => 'Le champ email est obligatoire.',
+            'email.email' => 'L\'adresse email doit être valide.',
+            'password.required' => 'Le mot de passe est obligatoire.',
+            'password.confirmed' => 'Les mots de passe ne correspondent pas.'
+        ];
+
+        return $request->validate($rules, $messages);
     }
 }
