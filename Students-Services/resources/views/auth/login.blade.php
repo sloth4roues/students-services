@@ -1,3 +1,5 @@
+@extends('layouts.app')
+
 <form action="{{ route('login') }}" method="POST">
     @csrf
     <input type="text" name="name" placeholder="Nom" value="{{ old('name') }}" required>

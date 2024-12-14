@@ -15,26 +15,17 @@ class UserController extends Controller
         return view('home');
     }
 
-    /**
-     * Display the logged-in user's profile.
-     */
     public function profile()
     {
         $user = Auth::user();
         return view('users.profile', compact('user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('users.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validatedData = $this->validateUser($request);
@@ -47,48 +38,33 @@ class UserController extends Controller
             ->with('success', 'User created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $user = User::findOrFail($id);
         return view('users.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit()
     {
-        $user = User::findOrFail($id);
+        $user = Auth::user();
         return view('users.edit', compact('user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        $user = User::findOrFail($id);
-        
-        $validatedData = $this->validateUser($request, $id);
+        $user = Auth::user();
 
-        if ($request->has('password')) {
-            $validatedData['password'] = bcrypt($validatedData['password']);
-        } else {
-            unset($validatedData['password']);
-        }
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:6|confirmed',
+        ]);
 
         $user->update($validatedData);
 
-        return redirect()->route('user.profile')
-            ->with('success', 'User updated successfully.');
+        return redirect()->route('user.profile')->with('success', 'Profil mis à jour avec succès.');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
@@ -98,9 +74,6 @@ class UserController extends Controller
             ->with('success', 'User deleted successfully.');
     }
 
-    /**
-     * Validate user input.
-     */
     private function validateUser(Request $request, $userId = null)
     {
         $rules = [
