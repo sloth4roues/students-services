@@ -15,19 +15,30 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        // Validation des champs d'entrée
+        $request->validate([
+            'name' => ['required', 'string'],
+            'password' => ['required', 'string'],
+        ], [
+            // Messages d'erreur personnalisés
+            'name.required' => 'Le nom est obligatoire.',
+            'password.required' => 'Le mot de passe est obligatoire.',
         ]);
 
+        // Récupérer les identifiants
+        $credentials = $request->only('name', 'password');
+
+        // Tentative d'authentification avec "name" au lieu d'email
         if (Auth::attempt($credentials)) {
+            // Authentification réussie
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/'); // Redirige vers la page d'accueil
         }
 
-        return back()->withErrors([
-            'email' => 'Les informations d’identification ne correspondent pas.',
-        ]);
+        // Si l'authentification échoue
+        return back()
+            ->with('error', 'Le nom ou le mot de passe est incorrect.')
+            ->onlyInput('name'); // Garde le champ "name" pré-rempli
     }
 
     public function destroy(Request $request)

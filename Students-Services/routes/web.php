@@ -18,8 +18,8 @@ Route::get('/register', [RegisterController::class, 'create']);
 Route::post('/register', [RegisterController::class, 'store']);
 
 // Routes de connexion
-Route::get('/login', [LoginController::class, 'create']);
-Route::post('/login', [LoginController::class, 'store']);
+Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
 // Routes utilisateur
 Route::get('/user', [UserController::class, 'index'])->name('user.index'); // Liste des utilisateurs
