@@ -56,7 +56,14 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 10em;
+        gap: 8em;
+    }
+
+    .card {
+        border-radius: 10px;
+        padding: 25px;
+        height: 47vh;
+        width: 15vw;
     }
 
     .card p {
@@ -88,18 +95,39 @@
     <div class="mainContent text-dark">
         <h1>Nos catégories les plus populaires</h1>
         <div class="serviceCard py-4">
-            <div class="card" style="width: 18rem;">
+            <div class="card">
                 <img src="{{ asset('images/pc.png') }}" class="card-img-top" alt="...">
-                <p>Test</p>
+                <p><b>Prêt de matériel</b>
+                    <br>
+                    <br>
+                    Besoin d’un pc ? D’un livre ? D’une enceinte ? 
+                    Tout les matériels à disposition </p>
             </div>
-            <div class="card" style="width: 18rem;">
+            <div class="card">
                 <img src="{{ asset('images/cours.png') }}" class="card-img-top" alt="...">
+                <p><b>Cours particulier</b>
+                    <br>
+                    <br>
+                    Des lacunes dans une matière ? Retrouve tout nos experts ici !
+                </p>
             </div>
-            <div class="card" style="width: 18rem;">
+            <div class="card">
                 <img src="{{ asset('images/groupe-detude.png') }}" class="card-img-top" alt="...">
+                <p><b>Groupe d’étude</b>
+                    <br>
+                    <br>
+                    Pas envie de travailler seul ? Rejoins un groupe d’étude 
+                    adapté à ton niveau !
+                </p>
             </div>
-            <div class="card" style="width: 18rem;">
+            <div class="card">
                 <img src="{{ asset('images/sortie.png') }}" class="card-img-top" alt="...">
+                <p><b>Sorties</b>
+                    <br>
+                    <br>
+                    Besoin d’un moment de détente ? Il y a forcément une 
+                    sortie programmée !
+                </p>
             </div>
         </div>
     </div>
