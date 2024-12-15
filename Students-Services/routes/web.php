@@ -34,4 +34,5 @@ Route::post('/ads', [AdsController::class, 'store'])->name('ads.store')->middlew
 Route::get('/ads/{ad}', [AdsController::class, 'show'])->name('ads.show'); // Afficher une annonce spécifique
 Route::get('/ads/{ad}/edit', [AdsController::class, 'edit'])->name('ads.edit')->middleware('auth'); // Formulaire de modification (protégé par auth)
 Route::put('/ads/{ad}', [AdsController::class, 'update'])->name('ads.update')->middleware('auth'); // Mise à jour d'une annonce
-Route::delete('/ads/{ad}', [AdsController::class, 'destroy'])->name('ads.destroy');
+Route::delete('/ads/{ad}', [AdsController::class, 'destroy'])->name('ads.destroy')->middleware('auth');
+

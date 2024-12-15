@@ -70,11 +70,14 @@ class AdsController extends Controller
         return redirect()->route('ads.index')->with('success', 'Annonce mise à jour avec succès !');
     }
     
-
     public function destroy(Ads $ad)
     {
+        // Vérifie si l'utilisateur est autorisé à supprimer l'annonce
+        $this->authorize('delete', $ad);
+        
+        // Si l'utilisateur est autorisé, on supprime l'annonce
         $ad->delete();
-    
+     
         return redirect()->route('ads.index')->with('success', 'Annonce supprimée avec succès !');
     }
     
