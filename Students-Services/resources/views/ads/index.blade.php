@@ -14,7 +14,10 @@
                 <strong>{{ $ad->title }}</strong>
                 <p>{{ $ad->description }}</p>
 
-                <!-- supp-->
+                <!-- Lien vers la page de modification -->
+                <a href="{{ route('ads.edit', $ad->id) }}">Modifier</a>
+
+                <!-- Formulaire de suppression -->
                 <form action="{{ route('ads.destroy', $ad->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?');">
                     @csrf
                     @method('DELETE')
