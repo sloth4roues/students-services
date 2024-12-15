@@ -41,9 +41,6 @@ class AdsController extends Controller
         return view('ads.index', compact('ads', 'searchTerm', 'sort'));
     }
 
-
-
-
     public function create()
     {
         return view('ads.create');
@@ -75,18 +72,16 @@ class AdsController extends Controller
     public function edit(Ads $ad)
     {
         try {
-            // si autorisé
+            // Vérifie si l'utilisateur est autorisé à modifier l'annonce
             $this->authorize('update', $ad);
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
-            // alert
+            // Alert : Si l'utilisateur n'a pas la permission
             return redirect()->route('ads.index')->with('error', "Vous n'avez pas la permission, cette annonce ne vous appartient pas !");
         }
     
         return view('ads.edit', compact('ad'));
     }
     
-    
-
     public function update(Request $request, Ads $ad)
     {
         $validated = $request->validate([
@@ -105,7 +100,7 @@ class AdsController extends Controller
             // Vérifie si l'utilisateur est autorisé à supprimer l'annonce
             $this->authorize('delete', $ad);
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
-            // Redirige avec un message d'alerte
+            // Alert : Si l'utilisateur n'a pas la permission
             return redirect()->route('ads.index')->with('error', "Vous n'avez pas la permission, cette annonce ne vous appartient pas !");
         }
     
@@ -113,6 +108,4 @@ class AdsController extends Controller
         $ad->delete();
         return redirect()->route('ads.index')->with('success', 'Annonce supprimée avec succès !');
     }
-    
-    
 }
