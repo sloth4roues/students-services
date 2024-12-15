@@ -82,6 +82,12 @@ class AdsController extends Controller
         return view('ads.edit', compact('ad'));
     }
     
+<<<<<<< HEAD
+=======
+    
+    
+
+>>>>>>> main
     public function update(Request $request, Ads $ad)
     {
         $validated = $request->validate([
@@ -108,4 +114,8 @@ class AdsController extends Controller
         $ad->delete();
         return redirect()->route('ads.index')->with('success', 'Annonce supprimée avec succès !');
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> main
 }
