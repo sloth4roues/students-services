@@ -4,24 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des annonces</title>
-    <style>
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-        .alert-error {
-            color: #a94442;
-            background-color: #f2dede;
-            border-color: #ebccd1;
-        }
-        .alert-success {
-            color: #3c763d;
-            background-color: #dff0d8;
-            border-color: #d6e9c6;
-        }
-    </style>
 </head>
 <body>
     <h1>Liste des annonces</h1>
@@ -39,6 +21,10 @@
         </div>
     @endif
 
+    <!-- Bouton pour créer une annonce -->
+    <a href="{{ route('ads.create') }}">
+        Créer une annonce
+    </a>
     <!-- Formulaire de recherche avec sélection du tri -->
     <form method="GET" action="{{ route('ads.index') }}" id="searchForm">
         <input type="text" name="search" placeholder="Rechercher une annonce..." value="{{ request()->input('search') }}">
@@ -49,7 +35,7 @@
             <option value="asc" {{ $sort == 'asc' ? 'selected' : '' }}>Plus ancien</option>
         </select>
 
-        <button type="submit" style="display:none;">Rechercher</button> <!-- Cacher le bouton -->
+        <button type="submit">Rechercher</button> <!-- Cacher le bouton -->
     </form>
 
     <!-- Affichage du message si aucune annonce n'est trouvée -->
@@ -62,7 +48,9 @@
                 <div>
                     <strong>{{ $ad->title }}</strong>
                     <p>{{ $ad->description }}</p>
+
                     <a href="{{ route('ads.edit', $ad->id) }}">Modifier</a>
+
                     <form action="{{ route('ads.destroy', $ad->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?');">
                         @csrf
                         @method('DELETE')
