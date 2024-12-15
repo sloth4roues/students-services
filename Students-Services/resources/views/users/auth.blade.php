@@ -25,6 +25,7 @@
         background-color: #FFC107;
         color: black;
         border: none;
+        transition: all 0.5s ease;
     }
 
     .btn-custom:hover {

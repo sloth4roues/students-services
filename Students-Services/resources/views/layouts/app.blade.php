@@ -35,7 +35,7 @@
         }
 
         .btn-outline-light {
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
         }
         .btn-outline-light:hover {
             box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.3);
