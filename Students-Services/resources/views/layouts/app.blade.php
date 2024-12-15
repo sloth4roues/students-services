@@ -12,23 +12,26 @@
         /* Liens */
         .nav-link {
             color: white;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
+            margin: 0 10px;
         }
         .nav-link:hover {
-            color: #FFC107; /* Jaune */
-            box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.3);
+            background-color: #FFC107;
+            color: black;
+            box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
         }
 
         /* Boutons */
-        .btn-warning {
-            background-color: #FFC107;
+        .btn-log {
             border: none;
-            color: black;
-            transition: all 0.3s ease;
+            color: white;
+            transition: all 0.5s ease;
         }
-        .btn-warning:hover {
+        .btn-log:hover {
             background-color: #e0a800;
-            box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.4);
+            color: black;
+            box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.5);
         }
 
         .btn-outline-light {
@@ -66,7 +69,7 @@
 
             <!-- Boutons de connexion ou profil -->
             <div>
-                <a href="/auth" class="btn btn-warning text-dark me-2">Connexion</a>
+                <a href="/auth" class="btn btn-log me-2">Connexion</a>
             </div>
         </div>
     </header>
@@ -75,8 +78,9 @@
         @yield('content')
     </main>
 
+    <!-- Utilisez la bonne version de Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

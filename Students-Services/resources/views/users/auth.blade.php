@@ -58,68 +58,69 @@
                                     <label class="form-label" for="loginName">Email or username</label>
                                 </div>
                                 @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    <div class='alert alert-danger'>{{ $message }}</div>
                                 @enderror
 
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="loginPassword" name="password" class="form-control" required />
-                                    <label class="form-label" for="loginPassword">Password</label>
+                                <div class='form-outline mb-4'>
+                                    <input type='password' id='loginPassword' name='password' class='form-control' required />
+                                    <label class='form-label' for='loginPassword'>Password</label>
                                 </div>
                                 @error('password')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    <div class='alert alert-danger'>{{ $message }}</div>
                                 @enderror
 
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-custom mb-4">Sign in</button>
+                                <div class='d-flex justify-content-center'>
+                                    <button type='submit' class='btn btn-custom mb-4'>Sign in</button>
                                 </div>
 
                                 @if (session('error'))
-                                    <div class="alert alert-danger">{{ session('error') }}</div>
+                                    <div class='alert alert-danger'>{{ session('error') }}</div>
                                 @endif
                             </form>
                         </div>
-                        <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                            <form action="{{ route('register.store') }}" method="POST">
+
+                        <div class='tab-pane fade' id='pills-register' role='tabpanel' aria-labelledby='tab-register'>
+                            <form action="{{ route('register.store') }}" method='POST'>
                                 @csrf
-                                <div class="form-outline mb-4">
-                                    <input type="text" id="registerName" name="name" class="form-control" value="{{ old('name') }}" required />
-                                    <label class="form-label" for="registerName">Name</label>
+                                <div class='form-outline mb-4'>
+                                    <input type='text' id='registerName' name='name' class='form-control' value="{{ old('name') }}" required />
+                                    <label class='form-label' for='registerName'>Name</label>
                                 </div>
                                 @error('name')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    <div class='alert alert-danger'>{{ $message }}</div>
                                 @enderror
 
-                                <div class="form-outline mb-4">
-                                    <input type="email" id="registerEmail" name="email" class="form-control" value="{{ old('email') }}" required />
-                                    <label class="form-label" for="registerEmail">Email</label>
+                                <div class='form-outline mb-4'>
+                                    <input type='email' id='registerEmail' name='email' class='form-control' value="{{ old('email') }}" required />
+                                    <label class='form-label' for='registerEmail'>Email</label>
                                 </div>
                                 @error('email')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    <div class='alert alert-danger'>{{ $message }}</div>
                                 @enderror
 
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="registerPassword" name="password" class="form-control" required />
-                                    <label class="form-label" for="registerPassword">Password</label>
+                                <div class='form-outline mb-4'>
+                                    <input type='password' id='registerPassword' name='password' class='form-control' required />
+                                    <label class='form-label' for='registerPassword'>Password</label>
                                 </div>
                                 @error('password')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    <div class='alert alert-danger'>{{ $message }}</div>
                                 @enderror
 
-                                <div class="form-outline mb-4">
-                                    <input type="password" id="registerRepeatPassword" name="password_confirmation" class="form-control" required />
-                                    <label class="form-label" for="registerRepeatPassword">Repeat password</label>
+                                <div class='form-outline mb-4'>
+                                    <input type='password' id='registerRepeatPassword' name='password_confirmation' class='form-control' required />
+                                    <label class='form-label' for='registerRepeatPassword'>Repeat password</label>
                                 </div>
 
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-custom mb-3">Sign up</button>
+                                <div class='d-flex justify-content-center'>
+                                    <button type='submit' class='btn btn-custom mb-3'>Sign up</button>
                                 </div>
 
                             </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                        </div> <!-- End of register tab -->
+                    </div> <!-- End of tab content -->
+                </div> <!-- End of card body -->
+            </div> <!-- End of card -->
+        </div> <!-- End of column -->
+    </div> <!-- End of row -->
+</div> <!-- End of container -->
 @endsection
