@@ -29,7 +29,7 @@
             transition: all 0.5s ease;
         }
         .btn-log:hover {
-            background-color: #e0a800;
+            background-color: #FFC107;
             color: black;
             box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.5);
         }
@@ -47,7 +47,7 @@
     <header class="py-3 sticky-top">
         <div class="container d-flex justify-content-between align-items-center">
             <!-- Logo -->
-            <a href="#" class="text-white fw-bold fs-4 text-decoration-none">Mon App</a>
+            <div class="text-white fw-bold fs-5 text-decoration-none">SS</div>
 
             <!-- Navigation principale -->
             <nav>
