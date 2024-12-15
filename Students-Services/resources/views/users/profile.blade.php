@@ -18,7 +18,19 @@
 
     .profileContent {
         position: relative;
-        margin-top: 12em;
+        margin-top: 5em;
+    }
+
+    h1 {
+        font-family: 'Roboto', sans-serif;
+        text-align: center;
+        margin-bottom: 2em;
+        color: black;
+        text-shadow: 
+          -1px -1px 0 #FFC107,  
+           1px -1px 0 #FFC107,
+          -1px  1px 0 #FFC107,
+           1px  1px 0 #FFC107;
     }
 </style>
 
@@ -26,10 +38,9 @@
          style="border-radius: .5rem .5rem 0 0; min-height: 50vh;">
     <!-- Conteneur pour les particules -->
     <div id="particles-js"></div>
-
+    <h1>Mon profil</h1>
     <div class="row d-flex justify-content-center">
         <div class="col col-md-9 col-lg-7 col-xl-6">
-            <!-- Ajout de l'animation Animate.css -->
             <div class="card animate__animated animate__fadeIn" style="border-radius: 15px;">
                 <div class="card-body p-4">
                     <div class="d-flex">
@@ -65,8 +76,7 @@
                                     <button type="submit" 
                                             class="btn btn-danger d-flex justify-content-center align-items-center w-100" 
                                             onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre profil ?')">
-                                        <i class="bi bi-trash me-1"></i>
-                                        Supprimer le profil
+                                            Supprimer le profil
                                     </button>
                                 </form>
                             </div>
@@ -82,55 +92,21 @@
 <script>
     particlesJS('particles-js', {
         particles: {
-            number: { value: 80, density: { enable: true, value_area: 800 } },
+            number: { value: 100, density: { enable: true, value_area: 800 } },
             color: { value: "#FFC107" },
             shape: {
                 type: "circle",
-                stroke: { width: 0, color: "#858583" },
+                stroke: { width: 0, color: "#000000" },
                 polygon: { nb_sides: 5 }
             },
-            opacity: {
-                value: 0.5,
-                random: false,
-                anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
-            },
-            size: {
-                value: 3,
-                random: true,
-                anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
-            },
-            line_linked: {
-                enable: true,
-                distance: 150,
-                color: "#ffffff",
-                opacity: 0.4,
-                width: 1
-            },
-            move: {
-                enable: true,
-                speed: 2,
-                direction: "none",
-                random: false,
-                straight: false,
-                out_mode: "out",
-                bounce: false,
-                attract: { enable: false, rotateX: 600, rotateY: 1200 }
-            }
+            opacity: { value: 0.5, random: false },
+            size: { value: 3, random: true },
+            line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+            move: { enable: true, speed: 2, direction: "none", out_mode: "out" }
         },
         interactivity: {
-            detect_on: "canvas",
-            events: {
-                onhover: { enable: true, mode: "grab" },
-                onclick: { enable: true, mode: "push" },
-                resize: true
-            },
-            modes: {
-                grab: { distance: 140, line_linked: { opacity: 1 } },
-                bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
-                repulse: { distance: 200, duration: 0.4 },
-                push: { particles_nb: 4 },
-                remove: { particles_nb: 2 }
-            }
+            events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" } },
+            modes: { grab: { distance: 140 }, push: { particles_nb: 4 } }
         },
         retina_detect: true
     });
