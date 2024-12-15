@@ -70,6 +70,40 @@
         text-align: center;
         text-shadow: none;
     }
+
+    .recentPosts h1 {
+        text-shadow: 
+          -1px -1px 0 #FFC107,  
+           1px -1px 0 #FFC107,
+          -1px  1px 0 #FFC107,
+           1px  1px 0 #FFC107;
+    }
+
+    .carousel-item .card {
+        width: 50em;
+        text-shadow: none;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: #FFC107;
+        border-radius: 50%;
+    }
+
+    .carousel-control-prev, .carousel-control-next {
+        width: 5%;
+    }
+
+    .imgPosted {
+        margin-top: 10%;
+        margin-left: 5%;
+    }
+
+    .posted {
+        font-size: 1.2em;
+        margin-left: 6em;
+        text-align: center;
+    }
 </style>
 
 <div>
@@ -130,6 +164,89 @@
                 </p>
             </div>
         </div>
+
+        <div class="recentPosts py-5">
+            <h1 class="text-center mb-4">Derniers Posts</h1>
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="carousel slide" data-ride="carousel" id="recentPostsCarousel">
+                    <!-- Flèches de navigation -->
+                    <a class="carousel-control-prev" href="#recentPostsCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </a>
+
+                    <!-- Contenu du carrousel -->
+                    <div class="carousel-inner">
+                        @php
+                            // Exemple de données simulées
+                            $posts = [
+                                [
+                                    'title' => 'Melody Nelson',
+                                    'user' => 'Lujipeka',
+                                    'image' => 'images/pc.png', 
+                                    'profile' => 'images/profile1.jpg',
+                                    'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                                ],
+                                [
+                                    'title' => 'Nouveau Café',
+                                    'user' => 'Jean Dupont',
+                                    'image' => 'images/pc.png',
+                                    'profile' => 'images/profile2.jpg',
+                                    'content' => 'Découvre ce café cosy, idéal pour étudier entre amis.'
+                                ],
+                                [
+                                    'title' => 'Concert Live',
+                                    'user' => 'Sarah M.',
+                                    'image' => 'images/pc.png',
+                                    'profile' => 'images/profile3.jpg',
+                                    'content' => 'Un concert exceptionnel ce week-end dans le parc central.'
+                                ]
+                            ];
+                        @endphp
+                        
+                        @foreach($posts as $key => $post)
+                        <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                            <div class="card bg-light shadow rounded p-3 d-flex flex-row" style="align-items: flex-start;">
+                                <div class="d-flex flex-column">
+                                    <h3 class="mb-3 font-weight-bold text-center">{{ $post['title'] }}</h3>
+                                    <img src="{{ asset($post['image']) }}" alt="{{ $post['title'] }}" 
+                                         class="img-fluid rounded mx-auto" 
+                                         style="width: 300px; border-radius: 10px;">
+                                </div>
+                                <div class="ml-4 d-flex flex-column justify-content-start" style="flex: 1;">
+                                    <div class="imgPosted d-flex align-items-center mb-3">
+                                        <img src="{{ asset($post['profile']) }}" alt="{{ $post['user'] }}" 
+                                             class="rounded-circle mr-2" style="width: 50px; height: 50px;">
+                                        <span class="posted">
+                                            <strong>Posté par :</strong> 
+                                            <br>{{ $post['user'] }}
+                                        </span>
+                                    </div>
+                                    <!-- Description -->
+                                    <p class="mb-0 text-dark">
+                                        <br>
+                                        <br>
+                                        {{ $post['content'] }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        @endforeach
+                    </div>
+                        
+                    <!-- Flèches de navigation -->
+                    <a class="carousel-control-next" href="#recentPostsCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Ajout des dépendances Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
 @endsection

@@ -53,10 +53,22 @@
                                 </div>
                             </div>
                             <div class="d-flex pt-1">
-                                <button type="button" data-mdb-button-init data-mdb-ripple-init 
-                                        class="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
-                                <button type="button" data-mdb-button-init data-mdb-ripple-init 
-                                        class="btn btn-primary flex-grow-1">Follow</button>
+                                <a href="{{ route('user.edit', $user->id) }}" 
+                                   class="btn btn-outline-warning text-dark me-2 d-flex justify-content-center align-items-center flex-fill">
+                                    <i class="bi bi-pencil-square me-1"></i>
+                                    Modifier mon profil
+                                </a>
+                                
+                                <form action="{{ route('user.destroy', $user->id) }}" method="POST" class="d-flex flex-fill m-0">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" 
+                                            class="btn btn-danger d-flex justify-content-center align-items-center w-100" 
+                                            onclick="return confirm('Êtes-vous sûr de vouloir supprimer votre profil ?')">
+                                        <i class="bi bi-trash me-1"></i>
+                                        Supprimer le profil
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
