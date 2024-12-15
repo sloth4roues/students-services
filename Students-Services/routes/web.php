@@ -7,8 +7,6 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', [UserController::class, 'home'])->name('home');
 
-Route::get('/', [UserController::class, 'home'])->name('home');
-
 Route::get('/auth', [LoginController::class, 'create'])->name('auth');
 Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');

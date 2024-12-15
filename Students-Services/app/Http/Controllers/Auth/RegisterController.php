@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class RegisterController extends Controller
 {
     public function create() {
-        return view('auth.auth');
+        return view('users.auth');
     }
 
     public function store(Request $request)

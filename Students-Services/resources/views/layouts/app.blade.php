@@ -43,7 +43,7 @@
     </style>
 </head>
 
-<body class="bg-secondary text-white">
+<body class="bg-light text-white">
     <header class="py-3 sticky-top">
         <div class="container d-flex justify-content-between align-items-center">
             <!-- Logo -->
