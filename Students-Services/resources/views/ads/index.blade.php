@@ -8,10 +8,17 @@
 <body>
     <h1>Liste des annonces</h1>
 
-    <!-- Formulaire de recherche -->
-    <form method="GET" action="{{ route('ads.index') }}">
+    <!-- Formulaire de recherche avec sélection du tri -->
+    <form method="GET" action="{{ route('ads.index') }}" id="searchForm">
         <input type="text" name="search" placeholder="Rechercher une annonce..." value="{{ request()->input('search') }}">
-        <button type="submit">Rechercher</button>
+
+        <!-- Sélecteur pour choisir l'ordre de tri -->
+        <select name="sort" onchange="this.form.submit()">
+            <option value="desc" {{ $sort == 'desc' ? 'selected' : '' }}>Plus récent</option>
+            <option value="asc" {{ $sort == 'asc' ? 'selected' : '' }}>Plus ancien</option>
+        </select>
+
+        <button type="submit" style="display:none;">Rechercher</button> <!-- Cacher le bouton -->
     </form>
 
     <!-- Affichage du message si aucune annonce n'est trouvée -->
@@ -19,7 +26,7 @@
         <p>Aucune annonce ne correspond à votre recherche pour "<strong>{{ $searchTerm }}</strong>".</p>
         @if(!empty($searchTerm))
             <p>Essayez des résultats similaires :</p>
-            <!-- Affichage des annonces similaires (si recherche partielle est faite) -->
+            <!-- Affichage des annonces similaires -->
             @foreach ($ads as $ad)
                 <div>
                     <strong>{{ $ad->title }}</strong>
@@ -34,7 +41,7 @@
             @endforeach
         @endif
     @else
-        <!-- Affichage des annonces qui correspondent exactement à la recherche -->
+        <!-- Affichage des annonces -->
         <ul>
             @foreach ($ads as $ad)
                 <li>

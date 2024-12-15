@@ -15,27 +15,32 @@ class AdsController extends Controller
 
     public function index(Request $request)
     {
-        // Récupère le terme de recherche
+        // Récupère le terme de recherche et l'option de tri
         $searchTerm = $request->input('search');
-    
+        $sort = $request->input('sort', 'desc'); // 'desc' par défaut, pour les plus récents en premier
+        
         // Si un terme de recherche est fourni, filtre les annonces
         if ($searchTerm) {
             // Recherche exacte par titre
-            $ads = Ads::where('title', 'like', '%' . $searchTerm . '%')->get();
-        
+            $ads = Ads::where('title', 'like', '%' . $searchTerm . '%')
+                      ->orderBy('creation_date', $sort) // Applique le tri
+                      ->get();
+            
             // Si aucune annonce n'est trouvée, chercher des résultats similaires
             if ($ads->isEmpty()) {
-                // Exemple de recherche similaire : on peut utiliser une correspondance sur le début du titre
-                $ads = Ads::where('title', 'like', $searchTerm . '%')->get();
+                $ads = Ads::where('title', 'like', $searchTerm . '%')
+                          ->orderBy('creation_date', $sort) // Applique le tri
+                          ->get();
             }
         } else {
-            // Si aucune recherche n'est faite, récupérer toutes les annonces
-            $ads = Ads::all();
+            // Si aucune recherche n'est faite, récupérer toutes les annonces et appliquer le tri
+            $ads = Ads::orderBy('creation_date', $sort)->get();
         }
-    
+        
         // Retourner la vue avec les résultats de recherche
-        return view('ads.index', compact('ads', 'searchTerm'));
+        return view('ads.index', compact('ads', 'searchTerm', 'sort'));
     }
+
 
 
 
