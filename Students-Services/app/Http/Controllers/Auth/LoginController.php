@@ -41,7 +41,7 @@ class LoginController extends Controller
             ->onlyInput('name'); // Garde le champ "name" pré-rempli
     }
 
-    public function destroy(Request $request)
+    public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();

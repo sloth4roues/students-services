@@ -70,6 +70,8 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
+        Auth::logout();
+
         return redirect()->route('login')
             ->with('success', 'User deleted successfully.');
     }

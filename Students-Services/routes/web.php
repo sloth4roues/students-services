@@ -8,8 +8,8 @@ use App\Http\Controllers\UserController;
 Route::get('/', [UserController::class, 'home'])->name('home');
 
 // Routes d'inscription
-Route::get('/register', [RegisterController::class, 'create']);
-Route::post('/register', [RegisterController::class, 'store']);
+Route::get('/register', [RegisterController::class, 'create'])->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
 // Routes de connexion
 Route::get('/login', [LoginController::class, 'create'])->name('login');
@@ -24,3 +24,4 @@ Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show'); 
 Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit'); // Formulaire de modification
 Route::put('/user/update', [UserController::class, 'update'])->name('user.update'); // Mise à jour
 Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy'); // Suppression
+Route::get('/profile', [UserController::class, 'profile'])->name('user.profile')->middleware('auth');

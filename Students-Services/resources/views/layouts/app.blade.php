@@ -12,8 +12,9 @@
         <div class="navbar-nav">
             @auth
                 <a class="nav-item nav-link" href="{{ route('user.profile') }}">Mon Profil</a>
-                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                <form action="{{ route('logout') }}" method="POST" class="display: inline;">
                     @csrf
+                    @method ('POST')
                     <button type="submit" class="btn btn-link nav-item nav-link">Déconnexion</button>
                 </form>
             @else
