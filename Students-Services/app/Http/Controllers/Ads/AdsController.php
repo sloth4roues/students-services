@@ -86,6 +86,7 @@ class AdsController extends Controller
     }
     
     
+    
 
     public function update(Request $request, Ads $ad)
     {
@@ -113,6 +114,5 @@ class AdsController extends Controller
         $ad->delete();
         return redirect()->route('ads.index')->with('success', 'Annonce supprimée avec succès !');
     }
-    
     
 }
