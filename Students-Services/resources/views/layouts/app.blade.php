@@ -19,7 +19,7 @@
             background-color: #FFC107;
             color: black;
             box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.5);
-            border-radius: 5px;
+            border-radius: 7px;
         }
 
         /* Boutons */
@@ -47,7 +47,7 @@
     <header class="py-3 sticky-top">
         <div class="container d-flex justify-content-between align-items-center">
             <!-- Logo -->
-            <div class="text-white fw-bold fs-5 text-decoration-none">SS</div>
+            <div class="text-white fw-bold fs-5 text-decoration-none">StudEase</div>
 
             <!-- Navigation principale -->
             <nav>
@@ -59,22 +59,28 @@
                         <a class="nav-link px-3" href="#">Catégories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="#">À propos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3" href="#">Contact</a>
+                        <a class="nav-link px-3" href="/profile">Profil</a>
                     </li>
                 </ul>
             </nav>
 
-            <!-- Boutons de connexion ou profil -->
+            <!-- Boutons de connexion ou déconnexion -->
             <div>
-                <a href="/auth" class="btn btn-log me-2">Connexion</a>
+                @auth
+                    <!-- Si l'utilisateur est connecté -->
+                    <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-log me-2">Déconnexion</button>
+                    </form>
+                @else
+                    <!-- Si l'utilisateur n'est pas connecté -->
+                    <a href="/auth" class="btn btn-log me-2">Connexion</a>
+                @endauth
             </div>
         </div>
     </header>
 
-    <main class="py-4">
+    <main>
         @yield('content')
     </main>
 
