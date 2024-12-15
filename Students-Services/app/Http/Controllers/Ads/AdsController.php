@@ -74,9 +74,14 @@ class AdsController extends Controller
 
     public function edit(Ads $ad)
     {
-        // Vérifie si l'utilisateur est autorisé à modifier l'annonce
-        $this->authorize('update', $ad);
-        
+        try {
+            // si autorisé
+            $this->authorize('update', $ad);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            // alert
+            return redirect()->route('ads.index')->with('error', "Vous n'avez pas la permission, cette annonce ne vous appartient pas !");
+        }
+    
         return view('ads.edit', compact('ad'));
     }
     
@@ -96,13 +101,18 @@ class AdsController extends Controller
     
     public function destroy(Ads $ad)
     {
-        // Vérifie si l'utilisateur est autorisé à supprimer l'annonce
-        $this->authorize('delete', $ad);
-        
+        try {
+            // Vérifie si l'utilisateur est autorisé à supprimer l'annonce
+            $this->authorize('delete', $ad);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            // Redirige avec un message d'alerte
+            return redirect()->route('ads.index')->with('error', "Vous n'avez pas la permission, cette annonce ne vous appartient pas !");
+        }
+    
         // Si l'utilisateur est autorisé, on supprime l'annonce
         $ad->delete();
-     
         return redirect()->route('ads.index')->with('success', 'Annonce supprimée avec succès !');
     }
+    
     
 }
