@@ -8,13 +8,11 @@ use App\Http\Controllers\Ads\AdsController;
 
 Route::get('/', [UserController::class, 'home'])->name('home');
 
-// Routes d'inscription
-Route::get('/register', [RegisterController::class, 'create'])->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-
-// Routes de connexion
+Route::get('/auth', [LoginController::class, 'create'])->name('auth');
 Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+Route::get('/register', [RegisterController::class, 'create'])->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Routes utilisateur

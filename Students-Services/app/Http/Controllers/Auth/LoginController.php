@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function create()
     {
-        return view('auth.login');
+        return view('users.auth');
     }
 
     public function store(Request $request)
