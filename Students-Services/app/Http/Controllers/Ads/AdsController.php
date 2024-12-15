@@ -13,12 +13,31 @@ class AdsController extends Controller
 {
     use AuthorizesRequests; // Ajoute cette ligne
 
-    public function index()
+    public function index(Request $request)
     {
-        $ads = Ads::all(); // Récupère toutes les annonces
-        return view('ads.index', compact('ads')); // Envoie les données à la vue
-    }
+        // Récupère le terme de recherche
+        $searchTerm = $request->input('search');
     
+        // Si un terme de recherche est fourni, filtre les annonces
+        if ($searchTerm) {
+            // Recherche exacte par titre
+            $ads = Ads::where('title', 'like', '%' . $searchTerm . '%')->get();
+        
+            // Si aucune annonce n'est trouvée, chercher des résultats similaires
+            if ($ads->isEmpty()) {
+                // Exemple de recherche similaire : on peut utiliser une correspondance sur le début du titre
+                $ads = Ads::where('title', 'like', $searchTerm . '%')->get();
+            }
+        } else {
+            // Si aucune recherche n'est faite, récupérer toutes les annonces
+            $ads = Ads::all();
+        }
+    
+        // Retourner la vue avec les résultats de recherche
+        return view('ads.index', compact('ads', 'searchTerm'));
+    }
+
+
 
     public function create()
     {

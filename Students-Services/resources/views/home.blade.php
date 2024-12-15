@@ -80,8 +80,12 @@
                 <span class="input-group-text" id="search-addon" style="background: transparent; border: none;">
                     <img src="{{ asset('images/loupe.png') }}" alt="Loupe" style="width: 30px; height: 30px;">
                 </span>
-                <input type="search" class="form-control rounded bg-warning input-search border-0" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />    </div>
+                <form action="{{ route('ads.index') }}" method="GET" class="d-flex">
+                    <input type="search" name="search" class="form-control rounded bg-warning input-search border-0" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="submit" style="display:none;">Search</button>
+                </form>
             </div>
+
         </div>
     </div>
 

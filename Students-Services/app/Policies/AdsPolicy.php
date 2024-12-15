@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\Ads;
+use Illuminate\Support\Facades\Log; 
 
 class AdsPolicy
 {
@@ -32,7 +33,6 @@ class AdsPolicy
      */
     public function delete(User $user, Ads $ad)
     {
-
         return $user->id === $ad->users_id;
     }
 }
