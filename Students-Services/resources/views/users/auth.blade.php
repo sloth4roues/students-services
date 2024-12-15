@@ -16,8 +16,8 @@
 
     /* Survol des onglets inactifs */
     .nav-pills .nav-link.tab-btn:not(.active):hover {
-        background-color: #e0a800 !important;
-        color: white !important;
+        background-color: #FFC107 !important;
+        box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.5);
     }
 
     /* Style général pour les boutons "Sign in" et "Sign up" */
@@ -28,8 +28,8 @@
     }
 
     .btn-custom:hover {
-        background-color: #e0a800;
-        color: white;
+        background-color: #FFC107;
+        box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.5);
     }
 </style>
 
