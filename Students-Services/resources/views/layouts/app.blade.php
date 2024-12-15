@@ -3,27 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Students Services</title>
+    <title>Header Bootstrap avec Effet Hover</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        header {
+            background-color: #6c757d;
+        }
+        /* Liens */
+        .nav-link {
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #FFC107; /* Jaune */
+            box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Boutons */
+        .btn-warning {
+            background-color: #FFC107;
+            border: none;
+            color: black;
+            transition: all 0.3s ease;
+        }
+        .btn-warning:hover {
+            background-color: #e0a800;
+            box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-outline-light {
+            transition: all 0.3s ease;
+        }
+        .btn-outline-light:hover {
+            box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{ route('home') }}">Mon App</a>
-        <div class="navbar-nav">
-            @auth
-                <a class="nav-item nav-link" href="{{ route('user.profile') }}">Mon Profil</a>
-                <form action="{{ route('logout') }}" method="POST" class="display: inline;">
-                    @csrf
-                    @method ('POST')
-                    <button type="submit" class="btn btn-link nav-item nav-link">Déconnexion</button>
-                </form>
-            @else
-                <a class="nav-item nav-link" href="{{ route('login') }}">Connexion</a>
-                <a class="nav-item nav-link" href="{{ route('register') }}">Inscription</a>
-            @endauth
+
+<body class="bg-secondary text-white">
+    <header class="py-3 sticky-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <!-- Logo -->
+            <a href="#" class="text-white fw-bold fs-4 text-decoration-none">Mon App</a>
+
+            <!-- Navigation principale -->
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="/">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#">Catégories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#">À propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3" href="#">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Boutons de connexion ou profil -->
+            <div>
+                <a href="/auth" class="btn btn-warning text-dark me-2">Connexion</a>
+            </div>
         </div>
-    </nav>
+    </header>
 
     <main class="py-4">
         @yield('content')
