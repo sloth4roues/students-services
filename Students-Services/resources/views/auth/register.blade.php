@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <form action="/register" method="POST">
     @csrf
     <input type="text" name="name" placeholder="Nom" value="{{ old('name') }}" required>
@@ -19,4 +22,4 @@
 
     <button type="submit">S'inscrire</button>
 </form>
-
+@endsection

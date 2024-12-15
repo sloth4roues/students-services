@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('content')
 <form action="{{ route('login.store') }}" method="POST">
     @csrf
     <input type="text" name="name" placeholder="Nom" value="{{ old('name') }}" required>
@@ -19,3 +20,4 @@
         <div style="color: red; margin-top: 10px;">{{ session('error') }}</div>
     @endif
 </form>
+@endsection
