@@ -38,3 +38,5 @@ Route::delete('/ads/{ad}', [AdsController::class, 'destroy'])->name('ads.destroy
 Route::post('/ads/{ad}/accept', [AdsController::class, 'accept'])->name('ads.accept')->middleware('auth'); // Accepter l'annonce
 
 Route::get('/my-ads', [AdsController::class, 'myAds'])->name('ads.my')->middleware('auth');
+Route::get('/accepted-ads', [AdsController::class, 'acceptedAds'])->name('ads.accepted')->middleware('auth');
+Route::get('/ads/accepted', [AdsController::class, 'acceptedAds'])->name('ads.accepted');

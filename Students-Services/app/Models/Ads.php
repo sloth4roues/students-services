@@ -17,7 +17,11 @@ class Ads extends Model
     {
         return $this->belongsTo(User::class, 'users_id');
     }
-    
+    public function acceptedBy()
+    {
+        return $this->belongsTo(User::class, 'accepted_by'); // Si tu as un champ 'accepted_by'
+    }
+
 
 }
 

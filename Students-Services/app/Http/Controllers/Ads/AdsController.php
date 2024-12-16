@@ -163,6 +163,27 @@ class AdsController extends Controller
         return view('ads.my_ads', compact('ads'));
     }
     
+    public function acceptedAds()
+    {
+        // Récupérer les annonces acceptées par l'utilisateur connecté
+        $ads = Ads::where('accepted_by', auth()->id())
+            ->where('is_accepted', 1)
+            ->get();
+
+        // Retourner la vue avec les annonces acceptées
+        return view('ads.accepted', compact('ads'));
+    }
+
+    public function showAcceptedAds()
+    {
+        // Récupérer les annonces acceptées par l'utilisateur connecté
+        $ads = Ads::where('accepted_by', auth()->id())
+            ->where('is_accepted', 1)
+            ->get();
+
+        return view('ads.accepted', compact('ads'));
+    }
+
     
-    
+
 }
