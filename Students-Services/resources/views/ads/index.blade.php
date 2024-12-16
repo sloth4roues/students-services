@@ -133,8 +133,7 @@
         <p class="landingText">
             Retrouvez toutes les annonces disponibles ici. Vous pouvez créer, modifier ou supprimer des annonces selon vos besoins.
         </p>
-        
-        <!-- Affichage des alertes -->
+
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -152,7 +151,7 @@
                 <img src="{{ asset('images/loupe.png') }}" alt="Loupe" style="width: 30px; height: 30px;">
             </span>
             <form action="{{ route('ads.index') }}" method="GET" class="d-flex">
-                <input type="search" name="search" class="form-control rounded bg-warning input-search border-0" placeholder="Rechercher" aria-label="Search" aria-describedby="search-addon" />
+                <input type="search" name="search" class="form-control rounded bg-warning input-search border-0" placeholder="Rechercher" aria-label="Search" aria-describedby="search-addon" value="{{ request()->input('search') }}" />
                 <button type="submit" style="display:none;">Search</button>
             </form>
         </div>
@@ -162,9 +161,16 @@
 <div class="mainContent text-dark">
     <h1>Liste des annonces</h1>
 
-    <!-- Formulaire de recherche avec sélection du tri -->
     <form method="GET" action="{{ route('ads.index') }}" class="search-form d-flex align-items-center mb-4">
         <input type="text" name="search" placeholder="Rechercher une annonce..." class="form-control w-50" value="{{ request()->input('search') }}">
+
+        <select name="category" class="form-control w-25" onchange="this.form.submit()">
+            <option value="">Toutes les catégories</option>
+            <option value="Prêt de matériel" {{ request()->input('category') == 'Prêt de matériel' ? 'selected' : '' }}>Prêt de matériel</option>
+            <option value="Cours particulier" {{ request()->input('category') == 'Cours particulier' ? 'selected' : '' }}>Cours particulier</option>
+            <option value="Groupe d’étude" {{ request()->input('category') == 'Groupe d’étude' ? 'selected' : '' }}>Groupe d’étude</option>
+            <option value="Sorties" {{ request()->input('category') == 'Sorties' ? 'selected' : '' }}>Sorties</option>
+        </select>
 
         <select name="sort" class="form-control w-25" onchange="this.form.submit()">
             <option value="desc" {{ $sort == 'desc' ? 'selected' : '' }}>Plus récent</option>
@@ -178,26 +184,23 @@
         <a href="{{ route('ads.create') }}" class="btn btn-success">Créer une annonce</a>
     </div>
     @if($ads->isEmpty())
-        <p>Aucune annonce trouvée pour "<strong>{{ $searchTerm }}</strong>".</p>
+    <p>Aucune annonce trouvée pour "<strong>{{ request()->input('category') ?: 'tous les critères' }}</strong>".</p>
     @else
         <ul class="ads-list">
             @foreach ($ads as $ad)
                 <li class="ad-item">
                     <h3>{{ $ad->title }}</h3>
+                    <p><strong>Catégorie :</strong> {{ $ad->category ?? 'Non classé' }}</p>
                     <p>{{ $ad->description }}</p>
                     <div class="ad-actions">
-                        <!-- Si l'utilisateur connecté n'est pas celui qui a posté l'annonce -->
-                        @if (auth()->user()->id !== $ad->user_id)
+                        @if (auth()->user()->id !== $ad->users_id)
                             <form action="{{ route('ads.accept', $ad->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 <button type="submit" class="btn btn-success">Accepter l'annonce</button>
                             </form>
                         @else
-                            <!-- Si l'utilisateur est celui qui a posté l'annonce, pas de bouton "Accepter" -->
                             <p>Vous avez posté cette annonce.</p>
                         @endif
-
-                        <!-- Boutons Modifier et Supprimer -->
                         <a href="{{ route('ads.edit', $ad->id) }}" class="btn btn-warning">Modifier</a>
                         <form action="{{ route('ads.destroy', $ad->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?');" style="display:inline;">
                             @csrf

@@ -106,6 +106,13 @@
         margin-left: 6em;
         text-align: center;
     }
+    a.card {
+        text-decoration: none; 
+    }
+
+    a.card:hover {
+        text-decoration: none; 
+    }
 </style>
 
 <div>
@@ -135,41 +142,39 @@
     <div class="mainContent text-dark">
         <h1>Nos catégories les plus populaires</h1>
         <div class="serviceCard py-4">
-            <div class="card">
-                <img src="{{ asset('images/pc.png') }}" class="card-img-top" alt="...">
+            <a href="{{ route('ads.index', ['category' => 'Prêt de matériel']) }}" class="card">
+                <img src="{{ asset('images/pc.png') }}" class="card-img-top" alt="Prêt de matériel">
                 <p><b>Prêt de matériel</b>
-                    <br>
-                    <br>
+                    <br><br>
                     Besoin d’un pc ? D’un livre ? D’une enceinte ? 
-                    Tout les matériels à disposition </p>
-            </div>
-            <div class="card">
-                <img src="{{ asset('images/cours.png') }}" class="card-img-top" alt="...">
+                    Tout le matériel à disposition.
+                </p>
+            </a>
+            <a href="{{ route('ads.index', ['category' => 'Cours particulier']) }}" class="card">
+                <img src="{{ asset('images/cours.png') }}" class="card-img-top" alt="Cours particulier">
                 <p><b>Cours particulier</b>
-                    <br>
-                    <br>
+                    <br><br>
                     Des lacunes dans une matière ? Retrouve tout nos experts ici !
                 </p>
-            </div>
-            <div class="card">
-                <img src="{{ asset('images/groupe-detude.png') }}" class="card-img-top" alt="...">
+            </a>
+            <a href="{{ route('ads.index', ['category' => 'Groupe d’étude']) }}" class="card">
+                <img src="{{ asset('images/groupe-detude.png') }}" class="card-img-top" alt="Groupe d’étude">
                 <p><b>Groupe d’étude</b>
-                    <br>
-                    <br>
+                    <br><br>
                     Pas envie de travailler seul ? Rejoins un groupe d’étude 
                     adapté à ton niveau !
                 </p>
-            </div>
-            <div class="card">
-                <img src="{{ asset('images/sortie.png') }}" class="card-img-top" alt="...">
+            </a>
+            <a href="{{ route('ads.index', ['category' => 'Sorties']) }}" class="card">
+                <img src="{{ asset('images/sortie.png') }}" class="card-img-top" alt="Sorties">
                 <p><b>Sorties</b>
-                    <br>
-                    <br>
+                    <br><br>
                     Besoin d’un moment de détente ? Il y a forcément une 
                     sortie programmée !
                 </p>
-            </div>
+            </a>
         </div>
+
 
         <div class="recentPosts py-5">
             <h1 class="text-center mb-4">Derniers Posts</h1>
