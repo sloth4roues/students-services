@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AdsController extends Controller
 {
+   
     use AuthorizesRequests;
 
     public function index(Request $request)
@@ -31,7 +32,7 @@ class AdsController extends Controller
             $query->where('category', $category);
         }
 
-        // Appliquer le tri
+        // Appliquer le tri et récupérer toutes les colonnes, y compris la catégorie
         $ads = $query->orderBy('creation_date', $sort)->get();
 
         return view('ads.index', compact('ads', 'searchTerm', 'sort', 'category'));
@@ -44,10 +45,13 @@ class AdsController extends Controller
 
     public function store(Request $request)
     {
+        // Afficher la valeur de la catégorie reçue
+        \Log::info('Catégorie reçue:', ['category' => $request->input('category')]);
+    
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:5000',
-            'category' => 'required|in:Prêt de matériel,Cours particulier,Groupe d’étude,Sorties',
+            'category' => 'required|in:Prêt de matériel,Cours particulier,Groupe d\'étude,Sorties',
         ]);
 
         $user = auth()->user();
@@ -58,15 +62,25 @@ class AdsController extends Controller
         $user->points -= 50;
         $user->save();
 
-        Ads::create([
+        // Créer l'annonce avec les données validées
+        $ad = Ads::create([
             'users_id' => $user->id,
             'title' => $validated['title'],
             'description' => $validated['description'],
             'category' => $validated['category'],
         ]);
 
-        return redirect()->route('ads.index')->with('success', 'Annonce créée avec succès !');
+        // Vérifier si l'annonce a été créée avec succès
+        if ($ad) {
+            \Log::info('Annonce créée avec succès:', ['ad' => $ad->toArray()]);
+            return redirect()->route('ads.index')->with('success', 'Annonce créée avec succès !');
+        } else {
+            \Log::error('Échec de la création de l\'annonce');
+            return redirect()->route('ads.index')->with('error', 'Une erreur est survenue lors de la création de l\'annonce.');
+        }
     }
+
+
 
     public function show(Ads $ad)
     {

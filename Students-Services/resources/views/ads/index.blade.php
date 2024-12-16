@@ -193,8 +193,8 @@
                     <p><strong>Catégorie :</strong> {{ $ad->category ?? 'Non classé' }}</p>
                     <p>{{ $ad->description }}</p>
                     <div class="ad-actions">
-                        @if (auth()->user()->id !== $ad->users_id)
-                            <form action="{{ route('ads.accept', $ad->id) }}" method="POST" style="display:inline;">
+                    @if (auth()->check() && auth()->user()->id !== $ad->users_id)
+                        <form action="{{ route('ads.accept', $ad->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 <button type="submit" class="btn btn-success">Accepter l'annonce</button>
                             </form>

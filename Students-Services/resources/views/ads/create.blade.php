@@ -100,11 +100,12 @@
                                 <label for="category" class="form-label">Catégorie :</label>
                                 <select id="category" name="category" class="form-select" required>
                                     <option value="" disabled selected>Choisissez une catégorie</option>
-                                    <option value="Prêt de matériel" {{ old('category') == 'Prêt de matériel' ? 'selected' : '' }}>Prêt de matériel</option>
-                                    <option value="Cours particulier" {{ old('category') == 'Cours particulier' ? 'selected' : '' }}>Cours particulier</option>
-                                    <option value="Groupe d’étude" {{ old('category') == 'Groupe d’étude' ? 'selected' : '' }}>Groupe d’étude</option>
-                                    <option value="Sorties" {{ old('category') == 'Sorties' ? 'selected' : '' }}>Sorties</option>
+                                    <option value="Prêt de matériel">Prêt de matériel</option>
+                                    <option value="Cours particulier">Cours particulier</option>
+                                    <option value="Groupe d'étude">Groupe d'étude</option>
+                                    <option value="Sorties">Sorties</option>
                                 </select>
+
                                 @error('category')
                                     <div class="form-error">{{ $message }}</div>
                                 @enderror
