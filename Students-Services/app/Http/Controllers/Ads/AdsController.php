@@ -119,37 +119,36 @@ class AdsController extends Controller
         $ad->delete();
         return redirect()->route('ads.index')->with('success', 'Annonce supprimée avec succès !');
     }
-    public function accept(Ads $ad)
+        public function accept(Ads $ad)
     {
-        // Vérifier si l'utilisateur essaie d'accepter sa propre annonce
-        if ($ad->users_id === auth()->id()) {
+        $user = auth()->user();
+
+        // Vérifie que l'annonce n'a pas déjà été acceptée
+        if ($ad->status == 'accepted') {
+            return redirect()->route('ads.index')->with('error', 'Cette annonce a déjà été acceptée.');
+        }
+
+        // Vérifie que l'utilisateur ne peut pas accepter sa propre annonce
+        if ($ad->users_id == $user->id) {
             return redirect()->route('ads.index')->with('error', 'Vous ne pouvez pas accepter votre propre annonce.');
         }
-    
-        // Récupérer l'utilisateur qui a posté l'annonce et celui qui accepte
-        $poster = $ad->user;  // Le propriétaire de l'annonce
-        $user = auth()->user(); // L'utilisateur qui accepte l'annonce
-    
-        // Vérifier que l'utilisateur propriétaire existe
-        if (!$poster) {
-            return redirect()->route('ads.index')->with('error', 'Propriétaire de l\'annonce introuvable.');
-        }
-    
-        // Appliquer la logique d'acceptation de l'annonce et de mise à jour des points
-        $ad->status = 'accepted'; // Mise à jour de l'état de l'annonce
-        $ad->save(); // Sauvegarder l'état de l'annonce
-    
-        // Ajouter les points à l'utilisateur qui accepte l'annonce
-        $user->points += 50; // Ajouter 50 points à l'utilisateur
+
+        // Ajouter 50 points à l'utilisateur qui accepte l'annonce
+        $user->points += 50;
         $user->save();
-    
-        // Retirer les points à l'utilisateur qui a posté l'annonce
-        $poster->points -= 50; // Retirer 50 points du propriétaire de l'annonce
+
+        // Retirer 50 points de l'utilisateur qui a posté l'annonce
+        $poster = User::find($ad->users_id);
+        $poster->points -= 50;
         $poster->save();
-    
-        // Afficher un message de succès
-        return redirect()->route('ads.index')->with('success', 'Annonce acceptée et points attribués.');
+
+        // Marquer l'annonce comme acceptée
+        $ad->status = 'accepted';
+        $ad->save();
+
+        // Supprimer l'annonce une fois qu'elle est acceptée
+        $ad->delete();
+
+        return redirect()->route('ads.index')->with('success', 'Annonce acceptée et supprimée avec succès.');
     }
-    
-    
 }
