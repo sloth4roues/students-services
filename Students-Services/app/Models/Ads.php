@@ -9,7 +9,7 @@ class Ads extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['users_id', 'title', 'description', 'creation_date'];
+    protected $fillable = ['users_id', 'title', 'description', 'creation_date', 'status']; // Ajouter 'status'
 
     public $timestamps = false;
 
