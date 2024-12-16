@@ -53,15 +53,26 @@ class AdsController extends Controller
             'description' => 'required|string|max:5000',
         ]);
     
-        // Création via Factory
-        $ad = Ads::factory()->create([
-            'users_id' => auth()->id(), // Utilisateur connecté
+        // Vérifie que l'utilisateur a suffisamment de points
+        $user = auth()->user();
+        if ($user->points < 50) {
+            return redirect()->route('ads.index')->with('error', 'Vous n\'avez pas assez de points pour poster une annonce.');
+        }
+    
+        // Déduit 50 points pour poster l'annonce
+        $user->points -= 50;
+        $user->save();
+    
+        // Création de l'annonce
+        $ad = Ads::create([
+            'users_id' => $user->id,
             'title' => $validated['title'],
             'description' => $validated['description'],
         ]);
     
         return redirect()->route('ads.index')->with('success', 'Annonce créée avec succès !');
     }
+    
     
 
     public function show(Ads $ad)
@@ -108,4 +119,21 @@ class AdsController extends Controller
         $ad->delete();
         return redirect()->route('ads.index')->with('success', 'Annonce supprimée avec succès !');
     }
+
+    public function accept(Ads $ad)
+    {
+        $user = auth()->user();
+
+        // Vérifie si l'utilisateur est autorisé à accepter l'annonce (logique métier à définir)
+        if ($ad->users_id === $user->id) {
+            return redirect()->route('ads.index')->with('error', 'Vous ne pouvez pas accepter votre propre annonce.');
+        }
+
+        // Ajoute 50 points à l'utilisateur qui accepte l'annonce
+        $user->points += 50;
+        $user->save();
+
+        return redirect()->route('ads.index')->with('success', 'Annonce acceptée et points ajoutés !');
+    }
+
 }

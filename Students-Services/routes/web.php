@@ -34,3 +34,4 @@ Route::get('/ads/{ad}/edit', [AdsController::class, 'edit'])->name('ads.edit')->
 Route::put('/ads/{ad}', [AdsController::class, 'update'])->name('ads.update')->middleware('auth'); // Mise à jour d'une annonce
 Route::delete('/ads/{ad}', [AdsController::class, 'destroy'])->name('ads.destroy')->middleware('auth');
 
+Route::post('/ads/{ad}/accept', [AdsController::class, 'accept'])->name('ads.accept')->middleware('auth'); // Accepter l'annonce et gagner des points
