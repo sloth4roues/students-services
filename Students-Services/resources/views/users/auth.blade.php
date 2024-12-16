@@ -21,7 +21,7 @@
     }
 
     .authCard {
-        margin-top: 13em;
+        margin-top: 8em;
     }
     
     /* Style des onglets actifs */

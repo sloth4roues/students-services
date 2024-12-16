@@ -2,6 +2,11 @@
 
 @section('content')
 <style>
+    /* Responsive Base Styles */
+    .landing {
+        width: 100%;
+    }
+
     .image-container {
         position: relative;
         height: 60vh;
@@ -11,7 +16,7 @@
     .full-page-image {
         position: absolute;
         top: 50%;
-        left: 50%; 
+        left: 50%;
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -20,7 +25,7 @@
     }
 
     .content {
-        background-color:rgba(133, 133, 131, 0.79);
+        background-color: rgba(133, 133, 131, 0.79);
         padding: 4em 8em;
         border-radius: 25px;
         position: absolute;
@@ -36,10 +41,9 @@
     }
 
     .input-search {
-        box-shadow: inset 4px 4px 1px rgba(0, 0, 0, 1); 
-        width:  600px;       
+        box-shadow: inset 4px 4px 1px rgba(0, 0, 0, 1);
+        width: 600px;
     }
-
 
     .mainContent {
         display: flex;
@@ -47,8 +51,8 @@
         align-items: center;
         flex-direction: column;
         color: white;
-        text-shadow: 
-          -1px -1px 0 #FFC107,  
+        text-shadow:
+          -1px -1px 0 #FFC107,
            1px -1px 0 #FFC107,
           -1px  1px 0 #FFC107,
            1px  1px 0 #FFC107;
@@ -74,8 +78,8 @@
     }
 
     .recentPosts h1 {
-        text-shadow: 
-          -1px -1px 0 #FFC107,  
+        text-shadow:
+          -1px -1px 0 #FFC107,
            1px -1px 0 #FFC107,
           -1px  1px 0 #FFC107,
            1px  1px 0 #FFC107;
@@ -106,12 +110,67 @@
         margin-left: 6em;
         text-align: center;
     }
+
     a.card {
-        text-decoration: none; 
+        text-decoration: none;
     }
 
     a.card:hover {
-        text-decoration: none; 
+        text-decoration: none;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media screen and (max-width: 768px) {
+        .content {
+            padding: 1em;
+            width: 95%;
+        }
+
+        .landingText {
+            font-size: 14px;
+        }
+
+        .serviceCard {
+            flex-direction: column;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .carousel-item .card {
+            flex-direction: column;
+        }
+
+        .carousel-item .card > div {
+            flex-direction: column !important;
+            align-items: center !important;
+        }
+
+        .imgPosted {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .posted {
+            margin-left: 0;
+            margin-top: 10px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .content {
+            top: 40%;
+        }
+
+        .landingText {
+            font-size: 12px;
+        }
+
+        .carousel-control-prev, .carousel-control-next {
+            width: 10%;
+        }
     }
 </style>
 
@@ -135,7 +194,6 @@
                     <button type="submit" style="display:none;">Search</button>
                 </form>
             </div>
-
         </div>
     </div>
 
@@ -175,7 +233,6 @@
             </a>
         </div>
 
-
         <div class="recentPosts py-5">
             <h1 class="text-center mb-4">Derniers Posts</h1>
             <div class="d-flex justify-content-center align-items-center">
@@ -188,7 +245,6 @@
                     <!-- Contenu du carrousel -->
                     <div class="carousel-inner">
                         @php
-                            // Exemple de données simulées
                             $posts = [
                                 [
                                     'title' => 'Melody Nelson',
@@ -213,7 +269,7 @@
                                 ]
                             ];
                         @endphp
-                        
+
                         @foreach($posts as $key => $post)
                         <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
                             <div class="card bg-light shadow rounded p-3 d-flex flex-row" style="align-items: flex-start;">
@@ -232,7 +288,6 @@
                                             <br>{{ $post['user'] }}
                                         </span>
                                     </div>
-                                    <!-- Description -->
                                     <p class="mb-0 text-dark">
                                         <br>
                                         <br>
@@ -245,7 +300,6 @@
                         @endforeach
                     </div>
                         
-                    <!-- Flèches de navigation -->
                     <a class="carousel-control-next" href="#recentPostsCarousel" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     </a>
@@ -255,9 +309,7 @@
     </div>
 </div>
 
-<!-- Ajout des dépendances Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 @endsection
