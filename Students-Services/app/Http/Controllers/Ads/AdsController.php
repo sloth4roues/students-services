@@ -152,16 +152,17 @@ class AdsController extends Controller
         return redirect()->route('ads.index')->with('success', 'Annonce acceptée et supprimée avec succès.');
     }
     
-    public function userAds()
+    public function myAds()
     {
-        // Récupérer l'utilisateur authentifié
-        $user = auth()->user();
+        $user = auth()->user(); // Récupération de l'utilisateur connecté
+        
+        // Récupération des annonces appartenant à cet utilisateur
+        $ads = Ads::where('users_id', $user->id)->orderBy('creation_date', 'desc')->get();
+        
+        // Retourne une vue spécifique pour les annonces de l'utilisateur
+        return view('ads.my_ads', compact('ads'));
+    }
     
-        // Récupérer toutes les annonces de cet utilisateur
-        $ads = Ads::where('users_id', $user->id)->get();
     
-        // Retourner la vue avec les annonces
-        return view('ads.user_ads', compact('ads'));
-    }    
-
+    
 }

@@ -2,32 +2,24 @@
 
 @section('content')
 <div class="container">
-    <h1>Mes annonces</h1>
-    
-    <!-- Affichage des alertes -->
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    <h1 class="text-center my-4">Mes Annonces</h1>
 
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+    <!-- Bouton pour revenir à la liste complète -->
+    <div class="text-center mb-4">
+        <a href="{{ route('ads.index') }}" class="btn btn-primary">Retour à toutes les annonces</a>
+    </div>
 
-    <a href="{{ route('ads.create') }}" class="btn btn-success mb-3">Créer une nouvelle annonce</a>
-
+    <!-- Vérifie s'il y a des annonces -->
     @if($ads->isEmpty())
-        <p>Vous n'avez encore posté aucune annonce.</p>
+        <p class="text-center">Vous n'avez publié aucune annonce pour le moment.</p>
     @else
         <ul class="list-group">
             @foreach ($ads as $ad)
-                <li class="list-group-item">
+                <li class="list-group-item mb-3">
                     <h3>{{ $ad->title }}</h3>
                     <p>{{ $ad->description }}</p>
-                    <div>
+                    <div class="ad-actions">
+                        <!-- Boutons Modifier et Supprimer -->
                         <a href="{{ route('ads.edit', $ad->id) }}" class="btn btn-warning">Modifier</a>
                         <form action="{{ route('ads.destroy', $ad->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?');" style="display:inline;">
                             @csrf
