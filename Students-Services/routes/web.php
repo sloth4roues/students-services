@@ -37,6 +37,6 @@ Route::put('/ads/{ad}', [AdsController::class, 'update'])->name('ads.update')->m
 Route::delete('/ads/{ad}', [AdsController::class, 'destroy'])->name('ads.destroy')->middleware('auth');
 Route::post('/ads/{ad}/accept', [AdsController::class, 'accept'])->name('ads.accept')->middleware('auth'); // Accepter l'annonce
 
-Route::get('/my-ads', [AdsController::class, 'myAds'])->name('ads.my')->middleware('auth');
-Route::get('/accepted-ads', [AdsController::class, 'acceptedAds'])->name('ads.accepted')->middleware('auth');
-Route::get('/ads/accepted', [AdsController::class, 'acceptedAds'])->name('ads.accepted');
+Route::get('/my-ads', [AdsController::class, 'myAds'])->name('ads.myAds');
+Route::get('/ads/accepted', [AdsController::class, 'acceptedAds'])->name('ads.accepted'); // Liste des annonces acceptées
+Route::get('/ads/my-accepted', [AdsController::class, 'showAcceptedAds'])->name('ads.showAcceptedAds'); // Annonces acceptées par moi
