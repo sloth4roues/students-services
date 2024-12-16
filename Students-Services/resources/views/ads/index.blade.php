@@ -165,19 +165,18 @@
     <!-- Formulaire de recherche avec sélection du tri -->
     <form method="GET" action="{{ route('ads.index') }}" class="search-form d-flex align-items-center mb-4">
         <input type="text" name="search" placeholder="Rechercher une annonce..." class="form-control w-50" value="{{ request()->input('search') }}">
-        
+
         <select name="sort" class="form-control w-25" onchange="this.form.submit()">
             <option value="desc" {{ $sort == 'desc' ? 'selected' : '' }}>Plus récent</option>
             <option value="asc" {{ $sort == 'asc' ? 'selected' : '' }}>Plus ancien</option>
         </select>
-        
+
         <button type="submit" class="btn btn-warning">Rechercher</button>
     </form>
 
     <div class="text-center mt-4">
         <a href="{{ route('ads.create') }}" class="btn btn-success">Créer une annonce</a>
     </div>
-
 
     @if($ads->isEmpty())
         <p>Aucune annonce trouvée pour "<strong>{{ $searchTerm }}</strong>".</p>
@@ -188,6 +187,18 @@
                     <h3>{{ $ad->title }}</h3>
                     <p>{{ $ad->description }}</p>
                     <div class="ad-actions">
+                        <!-- Si l'utilisateur connecté n'est pas celui qui a posté l'annonce -->
+                        @if (auth()->user()->id !== $ad->user_id)
+                            <form action="{{ route('ads.accept', $ad->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-success">Accepter l'annonce</button>
+                            </form>
+                        @else
+                            <!-- Si l'utilisateur est celui qui a posté l'annonce, pas de bouton "Accepter" -->
+                            <p>Vous avez posté cette annonce.</p>
+                        @endif
+
+                        <!-- Boutons Modifier et Supprimer -->
                         <a href="{{ route('ads.edit', $ad->id) }}" class="btn btn-warning">Modifier</a>
                         <form action="{{ route('ads.destroy', $ad->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?');" style="display:inline;">
                             @csrf

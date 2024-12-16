@@ -6,8 +6,8 @@ use App\Models\User;
 use App\Models\Ads;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Policies\AdsPolicy;  // Si nécessaire, importez votre policy
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests; // Ajoute ceci
+use App\Policies\AdsPolicy;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AdsController extends Controller
 {
@@ -119,21 +119,37 @@ class AdsController extends Controller
         $ad->delete();
         return redirect()->route('ads.index')->with('success', 'Annonce supprimée avec succès !');
     }
-
     public function accept(Ads $ad)
     {
-        $user = auth()->user();
-
-        // Vérifie si l'utilisateur est autorisé à accepter l'annonce (logique métier à définir)
-        if ($ad->users_id === $user->id) {
+        // Vérifier si l'utilisateur essaie d'accepter sa propre annonce
+        if ($ad->users_id === auth()->id()) {
             return redirect()->route('ads.index')->with('error', 'Vous ne pouvez pas accepter votre propre annonce.');
         }
-
-        // Ajoute 50 points à l'utilisateur qui accepte l'annonce
-        $user->points += 50;
+    
+        // Récupérer l'utilisateur qui a posté l'annonce et celui qui accepte
+        $poster = $ad->user;  // Le propriétaire de l'annonce
+        $user = auth()->user(); // L'utilisateur qui accepte l'annonce
+    
+        // Vérifier que l'utilisateur propriétaire existe
+        if (!$poster) {
+            return redirect()->route('ads.index')->with('error', 'Propriétaire de l\'annonce introuvable.');
+        }
+    
+        // Appliquer la logique d'acceptation de l'annonce et de mise à jour des points
+        $ad->status = 'accepted'; // Mise à jour de l'état de l'annonce
+        $ad->save(); // Sauvegarder l'état de l'annonce
+    
+        // Ajouter les points à l'utilisateur qui accepte l'annonce
+        $user->points += 50; // Ajouter 50 points à l'utilisateur
         $user->save();
-
-        return redirect()->route('ads.index')->with('success', 'Annonce acceptée et points ajoutés !');
+    
+        // Retirer les points à l'utilisateur qui a posté l'annonce
+        $poster->points -= 50; // Retirer 50 points du propriétaire de l'annonce
+        $poster->save();
+    
+        // Afficher un message de succès
+        return redirect()->route('ads.index')->with('success', 'Annonce acceptée et points attribués.');
     }
-
+    
+    
 }

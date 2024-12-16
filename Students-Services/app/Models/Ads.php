@@ -12,4 +12,12 @@ class Ads extends Model
     protected $fillable = ['users_id', 'title', 'description', 'creation_date'];
 
     public $timestamps = false;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id');
+    }
+
 }
+
+
