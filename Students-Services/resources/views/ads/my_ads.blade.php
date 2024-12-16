@@ -1,4 +1,3 @@
-<!-- resources/views/ads/my_ads.blade.php -->
 @extends('layouts.app')
 
 @section('content')
@@ -12,6 +11,7 @@
         <ul>
             @foreach ($ads as $ad)
                 <li>
+                    <p>my_ads</p>
                     <h2>{{ $ad->title }}</h2>
                     <p>{{ $ad->description }}</p>
                     <small>Créée le : {{ $ad->creation_date }}</small>

@@ -182,9 +182,10 @@
         <a href="{{ route('ads.myAds') }}" class="btn btn-primary">Voir mes annonces créées</a>
     </div>
 
+    
     <!-- Lien vers les annonces acceptées -->
     <div class="text-center mt-4">
-        <a href="{{ route('ads.accepted') }}" class="btn btn-primary">Voir mes annonces acceptées</a>
+        <a href="{{ route('ads.showAcceptedAds') }}">Voir les annonces acceptées</a>
     </div>
 
     <!-- Liste des annonces -->

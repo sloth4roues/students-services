@@ -141,9 +141,10 @@ class AdsController extends Controller
 
     public function acceptedAds()
     {
-        $ads = Ads::where('is_accepted', 1)->orderBy('creation_date', 'desc')->get();
+        $ads = Ads::where('is_accepted', 1)->orderBy('creation_date', 'desc')->paginate(15);
         return view('ads.accepted', compact('ads'));
     }
+    
     
     public function showAcceptedAds()
     {

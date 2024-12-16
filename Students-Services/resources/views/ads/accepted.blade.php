@@ -1,42 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    .mainContent{
-        color: black;
-    }
-
-    .ad-item p {
-        font-size: 1.1em;
-        color: black; /* Change la couleur du texte à noir */
-    }
-</style>
-
-<div class="mainContent">
-    <h1>Mes annonces acceptées</h1>
+<div class="container">
+    <h1>Annonces acceptées</h1>
 
     @if($ads->isEmpty())
-        <p>Aucune annonce acceptée.</p>
+        <p>Aucune annonce acceptée pour le moment.</p>
     @else
-        <ul class="ads-list">
-            @foreach ($ads as $ad)
-                <li class="ad-item">
-                    <h3>{{ $ad->title }}</h3>
-                    <p>{{ $ad->description }}</p>
-                    <div class="ad-actions">
-                        <p>Vous avez posté cette annonce.</p>
-
-                        <!-- Boutons Modifier et Supprimer -->
-                        <a href="{{ route('ads.edit', $ad->id) }}" class="btn btn-warning">Modifier</a>
-                        <form action="{{ route('ads.destroy', $ad->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette annonce ?');" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                        </form>
+        <div class="row">
+            @foreach($ads as $ad)
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $ad->title }}</h5>
+                            <p class="card-text">{{ Str::limit($ad->texte, 100) }}</p>
+                            <p class="card-text"><small class="text-muted">Publié le {{ $ad->created_at->format('d/m/Y') }}</small></p>
+                            <a href="{{ route('ads.show', $ad->id) }}" class="btn btn-primary">Voir l'annonce</a>
+                        </div>
                     </div>
-                </li>
+                </div>
             @endforeach
-        </ul>
+        </div>
+
+        {{ $ads->links() }}
     @endif
 </div>
 @endsection
