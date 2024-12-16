@@ -2,176 +2,196 @@
 
 @section('content')
 <style>
-    /* Responsive Base Styles */
-    .landing {
-        width: 100%;
-    }
+   .landing {
+    width: 100%;
+}
 
-    .image-container {
-        position: relative;
-        height: 60vh;
-        overflow: hidden;
-    }
+.image-container {
+    position: relative;
+    height: 60vh;
+    overflow: hidden;
+}
 
-    .full-page-image {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: translate(-50%, -60%);
-        filter: blur(5px);
-    }
+.full-page-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -60%);
+    filter: blur(5px);
+}
 
+.content {
+    background-color: rgba(133, 133, 131, 0.79);
+    padding: 4em 8em;
+    border-radius: 25px;
+    position: absolute;
+    top: 33%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    text-align: center;
+}
+
+.landingText {
+    font-size: 17px;
+}
+
+/* Barre de recherche */
+.input-search {
+    box-shadow: inset 4px 4px 1px rgba(0, 0, 0, 1);
+    width: 600px;
+    max-width: 100%; /* Assure que la largeur ne dépasse pas l'écran */
+    margin-bottom: 15px;
+}
+
+.mainContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    text-shadow:
+      -1px -1px 0 #FFC107,
+       1px -1px 0 #FFC107,
+      -1px  1px 0 #FFC107,
+       1px  1px 0 #FFC107;
+}
+
+.serviceCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8em;
+}
+
+.card {
+    border-radius: 10px;
+    padding: 25px;
+    height: 47vh;
+    width: 15vw;
+}
+
+.card p {
+    text-align: center;
+    text-shadow: none;
+}
+
+.recentPosts h1 {
+    text-shadow:
+      -1px -1px 0 #FFC107,
+       1px -1px 0 #FFC107,
+      -1px  1px 0 #FFC107,
+       1px  1px 0 #FFC107;
+}
+
+.carousel-item .card {
+    width: 50em;
+    text-shadow: none;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #FFC107;
+    border-radius: 50%;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 5%;
+}
+
+.imgPosted {
+    margin-top: 10%;
+    margin-left: 5%;
+}
+
+.posted {
+    font-size: 1.2em;
+    margin-left: 6em;
+    text-align: center;
+}
+
+a.card {
+    text-decoration: none;
+}
+
+a.card:hover {
+    text-decoration: none;
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
     .content {
-        background-color: rgba(133, 133, 131, 0.79);
-        padding: 4em 8em;
-        border-radius: 25px;
-        position: absolute;
-        top: 33%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-        text-align: center;
+        padding: 1em;
+        width: 95%;
     }
 
     .landingText {
-        font-size: 17px;
-    }
-
-    .input-search {
-        box-shadow: inset 4px 4px 1px rgba(0, 0, 0, 1);
-        width: 600px;
-    }
-
-    .mainContent {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        color: white;
-        text-shadow:
-          -1px -1px 0 #FFC107,
-           1px -1px 0 #FFC107,
-          -1px  1px 0 #FFC107,
-           1px  1px 0 #FFC107;
+        font-size: 14px;
     }
 
     .serviceCard {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 8em;
+        flex-direction: column;
     }
 
     .card {
-        border-radius: 10px;
-        padding: 25px;
-        height: 47vh;
-        width: 15vw;
-    }
-
-    .card p {
-        text-align: center;
-        text-shadow: none;
-    }
-
-    .recentPosts h1 {
-        text-shadow:
-          -1px -1px 0 #FFC107,
-           1px -1px 0 #FFC107,
-          -1px  1px 0 #FFC107,
-           1px  1px 0 #FFC107;
+        width: 100%;
+        max-width: 350px;
     }
 
     .carousel-item .card {
-        width: 50em;
-        text-shadow: none;
+        flex-direction: column;
     }
 
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        background-color: #FFC107;
-        border-radius: 50%;
-    }
-
-    .carousel-control-prev, .carousel-control-next {
-        width: 5%;
+    .carousel-item .card > div {
+        flex-direction: column !important;
+        align-items: center !important;
     }
 
     .imgPosted {
-        margin-top: 10%;
-        margin-left: 5%;
-    }
-
-    .posted {
-        font-size: 1.2em;
-        margin-left: 6em;
+        flex-direction: column;
         text-align: center;
     }
 
-    a.card {
-        text-decoration: none;
+    .posted {
+        margin-left: 0;
+        margin-top: 10px;
     }
 
-    a.card:hover {
-        text-decoration: none;
+    /* Réduire la largeur de la barre de recherche sur des écrans plus petits */
+    .input-search {
+        width: 90%; /* Utiliser 90% de la largeur de l'écran */
+        max-width: 500px; /* Limiter la largeur maximale */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .content {
+        top: 40%;
+        padding: 1em;
     }
 
-    /* Media Queries for Responsiveness */
-    @media screen and (max-width: 768px) {
-        .content {
-            padding: 1em;
-            width: 95%;
-        }
-
-        .landingText {
-            font-size: 14px;
-        }
-
-        .serviceCard {
-            flex-direction: column;
-        }
-
-        .card {
-            width: 100%;
-            max-width: 350px;
-        }
-
-        .carousel-item .card {
-            flex-direction: column;
-        }
-
-        .carousel-item .card > div {
-            flex-direction: column !important;
-            align-items: center !important;
-        }
-
-        .imgPosted {
-            flex-direction: column;
-            text-align: center;
-        }
-
-        .posted {
-            margin-left: 0;
-            margin-top: 10px;
-        }
+    .landingText {
+        font-size: 12px;
     }
 
-    @media screen and (max-width: 480px) {
-        .content {
-            top: 40%;
-        }
-
-        .landingText {
-            font-size: 12px;
-        }
-
-        .carousel-control-prev, .carousel-control-next {
-            width: 10%;
-        }
+    /* Ajuster la taille de l'icône de recherche */
+    .input-group-text img {
+        width: 25px;
+        height: 25px;
     }
+
+    .carousel-control-prev, .carousel-control-next {
+        width: 10%;
+    }
+
+    .input-search {
+        width: 85%; /* Réduire encore la taille sur des écrans très petits */
+        max-width: 400px;
+    }
+}
 </style>
 
 <div>
