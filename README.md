@@ -72,6 +72,10 @@ Si la base de données est encore vide ou qu'il y a des migrations à appliquer,
   php artisan db:seed
   ```
 
+- Attention, il faut aussi générer une clé : 
+```bash
+php artisan key:generate
+```
 ### 6. Démarrer le serveur de développement
 
 Tu peux démarrer le serveur de développement intégré de Laravel pour voir si tout fonctionne correctement :
