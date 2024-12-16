@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Ajout des dépendances -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
 <style>
-    /* Responsive Base Styles */
     body {
         overflow-x: hidden;
     }
@@ -82,7 +80,6 @@
         width: 100%;
     }
 
-    /* Media Queries for Responsiveness */
     @media screen and (max-width: 768px) {
         .profileContent {
             margin-top: 2em;
@@ -134,7 +131,6 @@
 </style>
 
 <section class="profileContent w-100">
-    <!-- Conteneur pour les particules -->
     <div id="particles-js"></div>
     
     <div class="container">

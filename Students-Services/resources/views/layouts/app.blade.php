@@ -16,7 +16,6 @@
             background-color: #6c757d;
         }
 
-        /* Logo */
         .navbar-brand {
             color: white;
             font-weight: bold;
@@ -28,7 +27,6 @@
             color: #FFC107;
         }
 
-        /* Navigation Links */
         .nav-link {
             color: white;
             transition: all 0.5s ease;
@@ -42,7 +40,6 @@
             border-radius: 7px;
         }
 
-        /* Buttons */
         .btn-log {
             border: none;
             color: white;
@@ -63,7 +60,6 @@
             box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.5);
         }
 
-        /* Mobile Responsiveness */
         @media screen and (max-width: 991px) {
             .navbar-collapse {
                 max-height: 80vh;
@@ -115,17 +111,13 @@
     <header class="sticky-top">
         <nav class="navbar navbar-expand-lg navbar-dark py-3">
             <div class="container">
-                <!-- Logo -->
                 <a class="navbar-brand" href="/">StudEase</a>
 
-                <!-- Mobile Toggle Button -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Navigation Content -->
                 <div class="collapse navbar-collapse" id="navbarContent">
-                    <!-- Navigation Links -->
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
                             <a class="nav-link px-3" href="/">Accueil</a>
@@ -138,16 +130,13 @@
                         </li>
                     </ul>
 
-                    <!-- Authentication Buttons -->
                     <div class="auth-buttons">
                         @auth
-                            <!-- Si l'utilisateur est connecté -->
                             <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                                 @csrf
                                 <button type="submit" class="btn btn-log me-2">Déconnexion</button>
                             </form>
                         @else
-                            <!-- Si l'utilisateur n'est pas connecté -->
                             <a href="/auth" class="btn btn-log me-2">Connexion</a>
                         @endauth
                     </div>
@@ -160,7 +149,6 @@
         @yield('content')
     </main>
 
-    <!-- Bootstrap Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

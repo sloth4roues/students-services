@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier l'annonce</title>
-    <!-- Lien vers la feuille de styles Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Optionnel : Lien vers une feuille de styles personnalisée -->
     <style>
         body {
             background-color: #f4f4f4;
@@ -62,39 +60,31 @@
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <div class="card form-card">
-                    <!-- Titre du formulaire -->
                     <div class="form-card-header">
                         <h4>Modifier l'annonce</h4>
                     </div>
-                    <!-- Corps du formulaire -->
                     <div class="form-card-body">
-                        <!-- Message de succès -->
                         @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
 
-                        <!-- Formulaire de modification -->
                         <form action="{{ route('ads.update', $ad->id) }}" method="POST">
                             @csrf
-                            @method('PUT') <!-- Utilisation de PUT pour indiquer la mise à jour -->
+                            @method('PUT') 
 
-                            <!-- Titre de l'annonce -->
                             <div class="mb-3">
                                 <label for="title" class="form-label">Titre :</label>
                                 <input type="text" id="title" name="title" class="form-control" value="{{ old('title', $ad->title) }}" required>
                             </div>
 
-                            <!-- Description de l'annonce -->
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description :</label>
                                 <textarea id="description" name="description" class="form-control" required>{{ old('description', $ad->description) }}</textarea>
                             </div>
 
-                            <!-- Bouton de soumission -->
                             <button type="submit" class="btn btn-custom">Mettre à jour</button>
                         </form>
 
-                        <!-- Lien de retour -->
                         <div class="back-link">
                             <a href="{{ route('ads.index') }}" class="btn btn-link">Retour à la liste des annonces</a>
                         </div>
@@ -104,7 +94,6 @@
         </div>
     </div>
 
-    <!-- Lien vers les scripts Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

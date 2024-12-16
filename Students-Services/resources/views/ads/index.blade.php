@@ -61,7 +61,7 @@
     }
 
     .ad-item {
-        background-color: rgba(0, 0, 0, 0.6); /* Darker background for better contrast */
+        background-color: rgba(0, 0, 0, 0.6); 
         border-radius: 15px;
         padding: 2em;
         margin-bottom: 2em;
@@ -111,7 +111,6 @@
         margin-right: 1em;
     }
 
-    /* Style pour la barre de recherche */
     .input-search {
         border-radius: 50px;
         padding: 10px;

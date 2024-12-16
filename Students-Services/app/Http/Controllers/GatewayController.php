@@ -9,7 +9,7 @@ use App\Models\User;
 
 class GatewayController extends Controller
 {
-    // Authentification (Login)
+    // Authentification
     public function login(Request $request)
     {
         $credentials = $request->only('name', 'password');
@@ -18,38 +18,37 @@ class GatewayController extends Controller
         $response = Http::post(env('AUTH_SERVICE_URL') . '/api/login', $credentials);
 
         if ($response->successful()) {
-            return response()->json($response->json(), 200); // Réponse de connexion réussie
+            return response()->json($response->json(), 200); 
         }
 
-        return response()->json(['error' => 'Authentication failed'], 401); // Échec de la connexion
+        return response()->json(['error' => 'Authentication failed'], 401); 
     }
 
-    // Inscription (Register)
+    // Inscription 
     public function register(Request $request)
     {
         $response = Http::post(env('AUTH_SERVICE_URL') . '/api/register', $request->all());
 
         if ($response->successful()) {
-            return response()->json($response->json(), 201); // Réponse de succès d'inscription
+            return response()->json($response->json(), 201); 
         }
 
-        return response()->json(['error' => 'Registration failed'], 400); // Échec de l'inscription
+        return response()->json(['error' => 'Registration failed'], 400); 
     }
 
     // Déconnexion (Logout)
     public function logout(Request $request)
     {
-        // Logique pour déconnecter l'utilisateur (ici, une suppression du token)
         Auth::logout();
         return response()->json(['message' => 'Logged out successfully'], 200);
     }
 
-    // Récupérer les données utilisateur (depuis le service backend)
+    // Récupérer les données utilisateur 
     public function getUserData(Request $request)
     {
-        $user = Auth::user(); // Récupère l'utilisateur connecté
+        $user = Auth::user(); 
 
-        return response()->json($user); // Retourne les données utilisateur
+        return response()->json($user);
     }
 
     // Mise à jour des données utilisateur

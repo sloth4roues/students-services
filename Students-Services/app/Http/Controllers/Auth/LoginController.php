@@ -15,12 +15,10 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
-        // Validation des champs d'entrée
         $request->validate([
             'name' => ['required', 'string'],
             'password' => ['required', 'string'],
         ], [
-            // Messages d'erreur personnalisés
             'name.required' => 'Le nom est obligatoire.',
             'password.required' => 'Le mot de passe est obligatoire.',
         ]);
@@ -30,15 +28,13 @@ class LoginController extends Controller
 
         // Tentative d'authentification avec "name" au lieu d'email
         if (Auth::attempt($credentials)) {
-            // Authentification réussie
             $request->session()->regenerate();
-            return redirect()->intended('/'); // Redirige vers la page d'accueil
+            return redirect()->intended('/'); 
         }
 
-        // Si l'authentification échoue
         return back()
             ->with('error', 'Le nom ou le mot de passe est incorrect.')
-            ->onlyInput('name'); // Garde le champ "name" pré-rempli
+            ->onlyInput('name'); 
     }
 
     public function logout(Request $request)

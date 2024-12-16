@@ -23,7 +23,7 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         max-width: 600px;
-        margin: 0 auto; /* Centrer horizontalement */
+        margin: 0 auto; 
     }
 
     h1 {
@@ -53,8 +53,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0 auto; /* Centrer horizontalement */
-        width: 100%; /* Utiliser toute la largeur du conteneur */
+        margin: 0 auto; 
+        width: 100%; 
     }
 
     .btn-primary {

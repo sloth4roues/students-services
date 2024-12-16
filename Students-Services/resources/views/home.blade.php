@@ -39,11 +39,10 @@
     font-size: 17px;
 }
 
-/* Barre de recherche */
 .input-search {
     box-shadow: inset 4px 4px 1px rgba(0, 0, 0, 1);
     width: 600px;
-    max-width: 100%; /* Assure que la largeur ne dépasse pas l'écran */
+    max-width: 100%; 
     margin-bottom: 15px;
 }
 
@@ -121,7 +120,6 @@ a.card:hover {
     text-decoration: none;
 }
 
-/* Media Queries for Responsiveness */
 @media screen and (max-width: 768px) {
     .content {
         padding: 1em;
@@ -160,10 +158,9 @@ a.card:hover {
         margin-top: 10px;
     }
 
-    /* Réduire la largeur de la barre de recherche sur des écrans plus petits */
     .input-search {
-        width: 90%; /* Utiliser 90% de la largeur de l'écran */
-        max-width: 500px; /* Limiter la largeur maximale */
+        width: 90%; 
+        max-width: 500px;
     }
 }
 
@@ -177,7 +174,6 @@ a.card:hover {
         font-size: 12px;
     }
 
-    /* Ajuster la taille de l'icône de recherche */
     .input-group-text img {
         width: 25px;
         height: 25px;
@@ -188,7 +184,7 @@ a.card:hover {
     }
 
     .input-search {
-        width: 85%; /* Réduire encore la taille sur des écrans très petits */
+        width: 85%; 
         max-width: 400px;
     }
 }
@@ -257,7 +253,6 @@ a.card:hover {
             <h1 class="text-center mb-4">Derniers Posts</h1>
             <div class="d-flex justify-content-center align-items-center">
                 <div class="carousel slide" data-ride="carousel" id="recentPostsCarousel">
-                    <!-- Flèches de navigation -->
                     <a class="carousel-control-prev" href="#recentPostsCarousel" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     </a>

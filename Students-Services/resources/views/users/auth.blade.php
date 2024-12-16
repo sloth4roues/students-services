@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Ajout des dépendances -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 
@@ -24,25 +23,21 @@
         margin-top: 8em;
     }
     
-    /* Style des onglets actifs */
     .nav-pills .nav-link.tab-btn.active {
         background-color: #FFC107 !important;
         color: black !important;
     }
 
-    /* Style des onglets inactifs */
     .nav-pills .nav-link.tab-btn:not(.active) {
         background-color: white !important;
         color: black !important;
     }
 
-    /* Survol des onglets inactifs */
     .nav-pills .nav-link.tab-btn:not(.active):hover {
         background-color: #FFC107 !important;
         box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.5);
     }
 
-    /* Style général pour les boutons "Sign in" et "Sign up" */
     .btn-custom {
         background-color: #FFC107;
         color: black;
@@ -56,7 +51,6 @@
     }
 </style>
 
-<!-- Conteneur des particules -->
 <div id="particles-js"></div>
 
 <div class="container mt-5 profileContent">

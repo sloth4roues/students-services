@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer une annonce</title>
-    <!-- Lien vers la feuille de styles Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Optionnel : Lien vers une feuille de styles personnalisée -->
     <style>
         body {
             background-color: #f4f4f4;
@@ -67,17 +65,13 @@
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <div class="card form-card">
-                    <!-- Titre du formulaire -->
                     <div class="form-card-header">
                         <h4>Créer une nouvelle annonce</h4>
                     </div>
-                    <!-- Corps du formulaire -->
                     <div class="form-card-body">
-                        <!-- Formulaire de création -->
                         <form action="{{ route('ads.store') }}" method="POST">
                             @csrf
 
-                            <!-- Titre de l'annonce -->
                             <div class="mb-3">
                                 <label for="title" class="form-label">Titre :</label>
                                 <input type="text" id="title" name="title" class="form-control" value="{{ old('title') }}" required>
@@ -86,7 +80,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Description de l'annonce -->
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description :</label>
                                 <textarea id="description" name="description" class="form-control" required>{{ old('description') }}</textarea>
@@ -95,7 +88,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Catégorie de l'annonce -->
                             <div class="mb-3">
                                 <label for="category" class="form-label">Catégorie :</label>
                                 <select id="category" name="category" class="form-select" required>
@@ -111,11 +103,9 @@
                                 @enderror
                             </div>
 
-                            <!-- Bouton de soumission -->
                             <button type="submit" class="btn btn-custom">Créer l'annonce</button>
                         </form>
 
-                        <!-- Lien de retour -->
                         <div class="back-link">
                             <a href="{{ route('ads.index') }}" class="btn btn-link">Retour à la liste des annonces</a>
                         </div>
@@ -125,7 +115,6 @@
         </div>
     </div>
 
-    <!-- Lien vers les scripts Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
