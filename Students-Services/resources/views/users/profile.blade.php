@@ -156,7 +156,7 @@
                                 <p class="mb-0">976</p>
                             </div>
                             <div>
-                                <p class="small text-muted mb-1">Rating</p>
+                                <p class="small text-muted mb-1">Note</p>
                                 <p class="mb-0">8.5</p>
                             </div>
                         </div>

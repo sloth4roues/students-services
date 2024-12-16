@@ -61,11 +61,11 @@
                     <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                         <li class="nav-item" role="presentation">
                             <a class="nav-link tab-btn active" id="tab-login" data-bs-toggle="pill" href="#pills-login" role="tab"
-                                aria-controls="pills-login" aria-selected="true">Login</a>
+                                aria-controls="pills-login" aria-selected="true">Connexion</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link tab-btn" id="tab-register" data-bs-toggle="pill" href="#pills-register" role="tab"
-                                aria-controls="pills-register" aria-selected="false">Register</a>
+                                aria-controls="pills-register" aria-selected="false">Inscription</a>
                         </li>
                     </ul>
 
@@ -76,7 +76,7 @@
                                 @csrf
                                 <div class="form-outline mb-4">
                                     <input type="text" id="loginName" name="name" class="form-control" value="{{ old('name') }}" required />
-                                    <label class="form-label" for="loginName">Email or username</label>
+                                    <label class="form-label" for="loginName">Email ou nom</label>
                                 </div>
                                 @error('name')
                                     <div class='alert alert-danger'>{{ $message }}</div>
@@ -84,14 +84,14 @@
 
                                 <div class='form-outline mb-4'>
                                     <input type='password' id='loginPassword' name='password' class='form-control' required />
-                                    <label class='form-label' for='loginPassword'>Password</label>
+                                    <label class='form-label' for='loginPassword'>Mot de passe</label>
                                 </div>
                                 @error('password')
                                     <div class='alert alert-danger'>{{ $message }}</div>
                                 @enderror
 
                                 <div class='d-flex justify-content-center'>
-                                    <button type='submit' class='btn btn-custom mb-4'>Sign in</button>
+                                    <button type='submit' class='btn btn-custom mb-4'>Se connecter</button>
                                 </div>
 
                                 @if (session('error'))
@@ -106,7 +106,7 @@
                                 @csrf
                                 <div class='form-outline mb-4'>
                                     <input type='text' id='registerName' name='name' class='form-control' value="{{ old('name') }}" required />
-                                    <label class='form-label' for='registerName'>Name</label>
+                                    <label class='form-label' for='registerName'>Nom</label>
                                 </div>
                                 @error('name')
                                     <div class='alert alert-danger'>{{ $message }}</div>
@@ -122,7 +122,7 @@
 
                                 <div class='form-outline mb-4'>
                                     <input type='password' id='registerPassword' name='password' class='form-control' required />
-                                    <label class='form-label' for='registerPassword'>Password</label>
+                                    <label class='form-label' for='registerPassword'>Mot de passe</label>
                                 </div>
                                 @error('password')
                                     <div class='alert alert-danger'>{{ $message }}</div>
@@ -130,11 +130,11 @@
 
                                 <div class='form-outline mb-4'>
                                     <input type='password' id='registerRepeatPassword' name='password_confirmation' class='form-control' required />
-                                    <label class='form-label' for='registerRepeatPassword'>Repeat password</label>
+                                    <label class='form-label' for='registerRepeatPassword'>Répéter le mot de passe</label>
                                 </div>
 
                                 <div class='d-flex justify-content-center'>
-                                    <button type='submit' class='btn btn-custom mb-3'>Sign up</button>
+                                    <button type='submit' class='btn btn-custom mb-3'>S'inscrire</button>
                                 </div>
                             </form>
                         </div>
