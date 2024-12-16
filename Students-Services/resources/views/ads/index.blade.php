@@ -86,7 +86,7 @@
     }
 
     .ad-actions a {
-        color:rgb(0, 0, 0);
+        color: rgb(0, 0, 0);
         text-decoration: none;
         margin-right: 1em;
     }
@@ -122,7 +122,6 @@
         background: transparent;
         border: none;
     }
-    
 </style>
 
 <div class="landing">
@@ -174,6 +173,11 @@
         
         <button type="submit" class="btn btn-warning">Rechercher</button>
     </form>
+
+    <div class="text-center mt-4">
+        <a href="{{ route('ads.create') }}" class="btn btn-success">Créer une annonce</a>
+    </div>
+
 
     @if($ads->isEmpty())
         <p>Aucune annonce trouvée pour "<strong>{{ $searchTerm }}</strong>".</p>
