@@ -6,15 +6,35 @@
     <title>Header Bootstrap avec Effet Hover</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
         header {
             background-color: #6c757d;
         }
-        /* Liens */
+
+        /* Logo */
+        .navbar-brand {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: #FFC107;
+        }
+
+        /* Navigation Links */
         .nav-link {
             color: white;
             transition: all 0.5s ease;
-            margin: 0 10px;
+            margin: 0 5px;
         }
+
         .nav-link:hover {
             background-color: #FFC107;
             color: black;
@@ -22,12 +42,13 @@
             border-radius: 7px;
         }
 
-        /* Boutons */
+        /* Buttons */
         .btn-log {
             border: none;
             color: white;
             transition: all 0.5s ease;
         }
+
         .btn-log:hover {
             background-color: #FFC107;
             color: black;
@@ -37,56 +58,109 @@
         .btn-outline-light {
             transition: all 0.5s ease;
         }
+
         .btn-outline-light:hover {
             box-shadow: inset 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 991px) {
+            .navbar-collapse {
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+
+            .navbar-nav {
+                align-items: center;
+                text-align: center;
+                margin-top: 15px;
+            }
+
+            .nav-link {
+                margin: 10px 0;
+                width: 100%;
+            }
+
+            .auth-buttons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 15px;
+            }
+
+            .auth-buttons .btn {
+                margin: 10px 0;
+                width: 200px;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+
+            .auth-buttons .btn {
+                width: 150px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 
 <body class="bg-light text-white">
-    <header class="py-3 sticky-top">
-        <div class="container d-flex justify-content-between align-items-center">
-            <!-- Logo -->
-            <div class="text-white fw-bold fs-5 text-decoration-none">StudEase</div>
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand" href="/">StudEase</a>
 
-            <!-- Navigation principale -->
-            <nav>
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link px-3" href="/">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3" href="#">Catégories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-3" href="/profile">Profil</a>
-                    </li>
-                </ul>
-            </nav>
+                <!-- Mobile Toggle Button -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <!-- Boutons de connexion ou déconnexion -->
-            <div>
-                @auth
-                    <!-- Si l'utilisateur est connecté -->
-                    <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="btn btn-log me-2">Déconnexion</button>
-                    </form>
-                @else
-                    <!-- Si l'utilisateur n'est pas connecté -->
-                    <a href="/auth" class="btn btn-log me-2">Connexion</a>
-                @endauth
+                <!-- Navigation Content -->
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Navigation Links -->
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link px-3" href="/">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3" href="#">Catégories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-3" href="/profile">Profil</a>
+                        </li>
+                    </ul>
+
+                    <!-- Authentication Buttons -->
+                    <div class="auth-buttons">
+                        @auth
+                            <!-- Si l'utilisateur est connecté -->
+                            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-log me-2">Déconnexion</button>
+                            </form>
+                        @else
+                            <!-- Si l'utilisateur n'est pas connecté -->
+                            <a href="/auth" class="btn btn-log me-2">Connexion</a>
+                        @endauth
+                    </div>
+                </div>
             </div>
-        </div>
+        </nav>
     </header>
 
-    <main>
+    <main class="flex-grow-1">
         @yield('content')
     </main>
 
-    <!-- Utilisez la bonne version de Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
