@@ -56,7 +56,7 @@
                         <a class="nav-link px-3" href="/">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3" href="#">Catégories</a>
+                        <a class="nav-link px-3" href="/ads">Annonces</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link px-3" href="/profile">Profil</a>
