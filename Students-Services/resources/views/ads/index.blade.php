@@ -177,10 +177,14 @@
     <div class="text-center mt-4">
         <a href="{{ route('ads.create') }}" class="btn btn-success">Créer une annonce</a>
     </div>
+    
 
     @if($ads->isEmpty())
         <p>Aucune annonce trouvée pour "<strong>{{ $searchTerm }}</strong>".</p>
     @else
+        <div class="text-center mt-4">
+            <a href="{{ route('user.ads') }}" class="btn btn-info">Voir mes annonces</a>
+        </div>
         <ul class="ads-list">
             @foreach ($ads as $ad)
                 <li class="ad-item">

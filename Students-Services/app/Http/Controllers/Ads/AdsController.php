@@ -119,7 +119,7 @@ class AdsController extends Controller
         $ad->delete();
         return redirect()->route('ads.index')->with('success', 'Annonce supprimée avec succès !');
     }
-        public function accept(Ads $ad)
+    public function accept(Ads $ad)
     {
         $user = auth()->user();
 
@@ -151,4 +151,17 @@ class AdsController extends Controller
 
         return redirect()->route('ads.index')->with('success', 'Annonce acceptée et supprimée avec succès.');
     }
+    
+    public function userAds()
+    {
+        // Récupérer l'utilisateur authentifié
+        $user = auth()->user();
+    
+        // Récupérer toutes les annonces de cet utilisateur
+        $ads = Ads::where('users_id', $user->id)->get();
+    
+        // Retourner la vue avec les annonces
+        return view('ads.user_ads', compact('ads'));
+    }    
+
 }
